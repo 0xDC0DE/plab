@@ -1,0 +1,26 @@
+version: '3.1'
+networks:
+  traefik2_proxy:
+    external:
+      name: traefik2_proxy
+services:
+  blog-nginx:
+    container_name: blog
+    restart: unless-stopped
+    image: blog
+    # ports:
+    #   - 8088:80
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik2_proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.blog-rtr.entrypoints=https"
+      - "traefik.http.routers.blog-rtr.rule=Host(`blog.$DOMAINNAME`)"
+      #- "traefik.http.routers.blog-rtr.rule=Host(`blog.$DOMAINNAME`) || ( Host(`blog.$DOMAINNAME`) &&  Path(`/css/{rec:[a-z,0-9,-]+}`, `/posts/{rec:[a-z,0-9,-]+}`) )"
+      - "traefik.http.routers.blog-rtr.tls=true"
+      ## HTTP Services
+      - "traefik.http.routers.blog-rtr.service=blog-svc"
+      - "traefik.http.services.blog-svc.loadbalancer.server.port=80"
