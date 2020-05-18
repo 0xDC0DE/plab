@@ -1,0 +1,28 @@
+version: '3.1'
+networks:
+  traefik2_proxy:
+    external:
+      name: traefik2_proxy
+services:
+  kanboard:
+    container_name: kanboard
+    restart: unless-stopped
+    image: kanboard/kanboard:latest
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik2_proxy
+    volumes:
+      - /home/p/kanboard/data:/var/www/app/data
+      - /home/p/kanboard/plugins:/var/www/app/plugins
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.kanboard-rtr.entrypoints=https"
+      - "traefik.http.routers.kanboard-rtr.rule=Host(`kanboard.$DOMAINNAME`)"
+      - "traefik.http.routers.kanboard-rtr.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.kanboard-rtr.middlewares=chain-oauth@file" # Google OAuth 2.0
+      ## HTTP Services
+      - "traefik.http.routers.kanboard-rtr.service=kanboard-svc"
+      - "traefik.http.services.kanboard-svc.loadbalancer.server.port=80"
