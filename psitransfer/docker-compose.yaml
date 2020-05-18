@@ -1,0 +1,29 @@
+version: '3.1'
+networks:
+  traefik2_proxy:
+    external:
+      name: traefik2_proxy
+services:
+  psitransfer:
+    container_name: psitransfer
+    restart: unless-stopped
+    image: psitrax/psitransfer:latest
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik2_proxy
+    volumes:
+      - $USERDIR/psitransfer/data:/data
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.psitransfer-rtr.entrypoints=https"
+      - "traefik.http.routers.psitransfer-rtr.rule=Host(`files.$DOMAINNAME`)"
+      - "traefik.http.routers.psitransfer-rtr.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.psitransfer-rtr.middlewares=chain-basic-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.psitransfer-rtr.service=psitransfer-svc"
+      - "traefik.http.services.psitransfer-svc.loadbalancer.server.port=3000"
+
+
