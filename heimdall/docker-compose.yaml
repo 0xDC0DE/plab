@@ -1,0 +1,34 @@
+version: "2.1"
+networks:
+  traefik2_proxy:
+    external:
+      name: traefik2_proxy
+services:
+  heimdall:
+    container_name: heimdall
+    image: linuxserver/heimdall:latest
+    restart: unless-stopped
+    networks:
+      - traefik2_proxy
+    #ports:
+    #  - "8008:80"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - $USERDIR/heimdall/config:/config
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.heimdall-rtr.entrypoints=https"
+      - "traefik.http.routers.heimdall-rtr.rule=Host(`$DOMAINNAME`, `www.$DOMAINNAME`)"
+      - "traefik.http.routers.heimdall-rtr.tls=true"
+#      - "traefik.http.routers.heimdall-rtr.tls.certresolver=dns-cloudflare"
+      ## Middlewares
+      - "traefik.http.routers.heimdall-rtr.middlewares=chain-oauth@file"
+      ## HTTP Services
+      - "traefik.http.routers.heimdall-rtr.service=heimdall-svc"
+      - "traefik.http.services.heimdall-svc.loadbalancer.server.port=80"
