@@ -89,13 +89,6 @@ Start the container and forward the correct port
 docker run --name blog -d -p 8080:80 blog
 {{< / highlight >}}
 
-
-## CI/CD
-Recreating and then restarting the container everytime I update or add a blog post becomes tedious. So I want to automate this process.
-I can write and update blog posts and verify how they look locally using the draft server. When I am happy I can push this to a GitHub repository.
-
-TODO: Here I will write how to use git hooks to automatically build and deploy the website once I have gotten around to doing that.
-
 ## Reverse Proxy
 I did not configure routing and any security settings using Nginx, because I already have Traefik running on my homelab.
 How to install, configure and run Traefik is content for an entire blogpost by itself, and there are much better guides out there than I could ever write.
