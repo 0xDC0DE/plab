@@ -1,0 +1,293 @@
+####################
+# HOME DATA
+####################
+
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Tatooine
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret time_zone
+
+http:
+  # No longer needed when using Traefik
+  # base_url: !secret base_url
+  # ssl_certificate: /config/certs/fullchain.pem
+  # ssl_key: /config/certs/privkey.pem
+
+####################
+# UI
+####################
+
+# Enables the System Health Monitoring tool: Developer Info: System tab
+system_health:
+
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Enables configuration UI
+config:
+
+# Enables lovelace.yaml UI configuration
+lovelace:
+  mode: yaml
+  resources: !include lovelace/resources.yaml
+  dashboards: !include lovelace/dashboards.yaml
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+####################
+# INCLUDES
+####################
+
+group: !include groups.yaml
+scene: !include scenes.yaml
+
+# not used for now, automations are done through nodered
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+# Enables support for tracking state changes over time
+history:
+  exclude:
+    domains:
+      - device_tracker
+      - calendar
+
+# View all events in a logbook
+logbook:
+
+# TODO: migrate to influxdb
+logger: # https://www.home-assistant.io/components/logger/
+  default: error
+  logs:
+    custom_components: debug
+    pyupdate: debug
+
+####################
+# WEATHER
+####################
+# TODO: migrage to WUnderground or something else, darksky is bought by apple
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    mode: daily
+sun:
+
+####################
+# LOCATION
+####################
+
+# Enables support for the mobile app
+mobile_app:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Geo Zones
+zone:
+  - name: Office
+    latitude: !secret office_latitude
+    longitude: !secret office_longitude
+    radius: 250
+    icon: mdi:office-building
+  - name: Hospital
+    latitude: !secret hospital_latitude
+    longitude: !secret hospital_longitude
+    radius: 350
+    icon: mdi:hospital-building
+  - name: !secret near_home_name
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 2000
+  - name: College
+    latitude: !secret college_latitude
+    longitude: !secret college_longitude
+    radius: 250
+  - name: University
+    latitude: !secret university_latitude
+    longitude: !secret university_longitude
+    radius: 250
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 150
+    icon: mdi:home-outline
+
+####################
+# LIGHTS
+####################
+
+# switches as lights
+light:
+  - platform: switch
+    name: Bedlight
+    entity_id: switch.bed_light
+  - platform: switch
+    name: Tower Lamp
+    entity_id: switch.tower_lamp
+  - platform: switch
+    name: Garden Lights
+    entity_id: switch.garden_lights
+  - platform: switch
+    name: Bar Lamp
+    entity_id: switch.bar_lamp
+  - platform: switch
+    name: Corner Lamp
+    entity_id: switch.corner_lamp
+  - platform: switch
+    name: Led lights
+    entity_id: switch.led_controller
+
+# TPLINK WIFI devices
+tplink:
+  light:
+    - host: !secret tplink_light_ip
+  switch:
+    - host: !secret tplink_washer_ip
+    - host: !secret tplink_dryer_ip
+
+# Tuya for generic brand wifi devices: ( currently one bulb and two switches)
+tuya:
+  username: !secret tuya_username
+  password: !secret tuya_password
+  country_code: !secret tuya_country_code
+
+####################
+# GOOGLE
+####################
+
+# Google Calendar
+#google:
+#  client_id: !secret google_client_id
+#  client_secret: !secret google_client_secret
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+# Expose to Google Assistant
+google_assistant:
+  project_id: !secret google_assistant_project_id
+  # deprecated
+  # api_key: !secret google_assistant_project_api_key
+  service_account:
+    client_email: !secret google_client_email
+    private_key: !secret google_private_key
+  exposed_domains:
+    - scene
+    - switch
+    - light
+    - vacuum
+  entity_config:
+    sensor.living_room_temperature:
+      name: Living Room Temperature
+      aliases:
+        - Living Room Temperature
+        - Home Temperature
+        - Living Temperature
+        - Indoor Temperature
+        - Temperature Indoor
+      room: Living Room
+      expose: true
+    sensor.bedroom_temperature:
+      name: Bedroom Temperature
+      aliases:
+        - Bedroom Temperature
+        - Upstairs Temperature
+        - Temperature Upstairs
+      room: Bedroom
+      expose: true
+    #Exclude these switches, they are exposed as Lights instead
+    switch.bar_lamp:
+      expose: false
+    switch.corner_lamp:
+      expose: false
+    switch.tower_lamp:
+      expose: false
+    switch.bed_light:
+      expose: false
+    switch.garden_lights:
+      expose: false
+
+####################
+# INPUT
+####################
+
+input_boolean: !include input/input_boolean.yaml
+input_datetime: !include input/input_datetime.yaml
+input_select: !include input/input_select.yaml
+
+####################
+# SENSORS
+####################
+sensor: !include sensor.yaml
+
+####################
+# ROBOROK VACUUM
+####################
+
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret xiaomi_vacuum_ip
+    token: !secret xiaomi_vacuum_token
+
+####################
+# PUSH NOTIFICATIONS
+####################
+notify:
+  # Migrated to mobile app, no need for notifications on desktops
+  # - platform: html5
+  #   name: Home Assistant Notifications
+  #   vapid_pub_key: !secret vapid_pub_key
+  #   vapid_prv_key: !secret vapid_prv_key
+  #   vapid_email: !secret vapid_email
+  - name: mobiles
+    platform: group
+    services:
+      - service: mobile_app_sarah
+      - service: mobile_app_pieter
+      - service: mobile_app_oneplus_a6003
+
+####################
+# CAMERA
+####################
+camera:
+  - platform: generic
+    still_image_url: !secret reolink_1_still
+    stream_source: !secret reolink_1_stream
+    name: "Patio"
+  - platform: generic
+    still_image_url: !secret reolink_2_still
+    stream_source: !secret reolink_2_stream
+    name: "Nursery"
+
+####################
+# SYSTEM MONITORING
+####################
+# TODO: update to work with Traefik
+glances:
+  - host: 192.168.0.20
+
+speedtestdotnet:
