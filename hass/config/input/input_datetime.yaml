@@ -1,0 +1,32 @@
+vacuum_time_weekday:
+  name: Vacuum on weekdays at
+  has_date: false
+  has_time: true
+  initial: '16:10'
+vacuum_time_weekend:
+  name: Vacuum on weekend at
+  has_date: false
+  has_time: true
+  initial: '14:00'
+
+front_door_last_opened:
+  name: Front door last opened at
+  has_date: true
+  has_time: true
+back_door_last_opened:
+  name: Back door last opened at
+  has_date: true
+  has_time: true
+doorbell_last_rung:
+  name: Doorbell last rung
+  has_date: true
+  has_time: true
+
+alarm_pieter:
+  name: Alarm
+  has_time: true
+  has_date: false
+alarm_sarah:
+  name: Alarm
+  has_time: true
+  has_date: false

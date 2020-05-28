@@ -1,0 +1,66 @@
+# Input booleans are being used to "trigger" Node-Red automations and remember automation states
+
+# Google Assistant can be used to flip an input boolean, a flipped input boolean starts the automation
+# The automation performs some tasks or answers some text, and also flips the boolean back
+
+# Non Binary Presence Detection switches this on and off, it is used for light automations
+expect_device_tracker_arrival_pieter:
+  initial: off
+expect_device_tracker_arrival_sarah:
+  initial: off
+
+# To enable/disable automatic vacuuming
+sarah_worked_night_shift:
+  initial: off
+automate_vacuum_monday:
+  initial: on
+automate_vacuum_tuesday:
+  initial: on
+automate_vacuum_wednesday:
+  initial: on
+automate_vacuum_thursday:
+  initial: on
+automate_vacuum_friday:
+  initial: on
+automate_vacuum_saturday:
+  initial: on
+automate_vacuum_sunday:
+  initial: on
+
+skip_when_home:
+  initial: off
+skip_when_baby_monitor_on:
+  initial: off
+
+vacuumed_today:
+  initial: off
+cleaned_before_docking:
+  initial: off
+
+# Alarms
+alarm_lights:
+  initial: on
+alarm_radio:
+  initial: on
+alarm_monday:
+  initial: on
+alarm_tuesday:
+  initial: on
+alarm_wednesday:
+  initial: on
+alarm_thursday:
+  initial: on
+alarm_friday:
+  initial: on
+alarm_saturday:
+  initial: on
+alarm_sunday:
+  initial: on
+
+# For beta testing automations and to disable/enable some automations
+guest_mode:
+  name: Guest Mode
+  initial: off
+
+doorbell_lights_in_progress:
+  initial: off

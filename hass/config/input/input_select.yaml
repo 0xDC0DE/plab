@@ -1,0 +1,28 @@
+# These are used for non-binary presence detection
+
+pieter_presence_status:
+  name: Pieter
+  options:
+    - Home
+    - Just Arrived Home
+    - Office
+    - Just Left Home
+    - Just Left Office
+    - Away
+    - Extended Away
+    - University
+    - Just Left University
+  initial: Home
+sarah_presence_status:
+  name: Sarah
+  options:
+    - Home
+    - Just Arrived Home
+    - Hospital
+    - Just Left Home
+    - Just Left Hospital
+    - Away
+    - Extended Away
+    - College
+    - Just Left College
+  initial: Home
