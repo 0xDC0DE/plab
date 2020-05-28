@@ -1,0 +1,43 @@
+bedroom_lights:
+  name: Bedroom Lights
+  entities:
+    - light.bedroom_ceiling_light
+    - light.reading_light
+    - light.bedlight
+living_room_lights:
+  name: Living Room Lights
+  entities:
+    - light.bar_lamp
+    - light.corner_lamp
+    - light.tower_lamp
+    - light.led_strip_2
+downstairs_lights:
+  name: Downstairs Lights
+  entities:
+    - light.bar_lamp
+    - light.corner_lamp
+    - light.tower_lamp
+    - light.led_strip_2
+    - light.garden_lights
+people:
+  name: People
+  entities:
+    - device_tracker.pieter
+    - device_tracker.sarah
+expect_arrival:
+  name: Expect someone arriving home
+  entities:
+    - input_boolean.expect_device_tracker_arrival_pieter
+    - input_boolean.expect_device_tracker_arrival_sarah
+motion_hallway:
+  name: Motion Hallway
+  entities:
+    - binary_sensor.motion_sensor_upstairs
+    - binary_sensor.motion_sensor_downstairs
+office_devices:
+  name: Office Devices
+  entities:
+    - switch.star_light
+    - switch.desk
+    - swith.second_desk
+    - light.led_strip
