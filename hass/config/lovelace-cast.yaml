@@ -1,0 +1,4 @@
+title: Tatooine
+views:
+  # Including separately instead of the yaml files directly allows for easier reordering of the tabs (instead of renaming files for their order)
+  - !include lovelace/views-lovelace-cast/downstairs.yaml
