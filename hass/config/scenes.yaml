@@ -1,0 +1,38 @@
+- name: Activity
+  entities:
+    switch.bar_lamp: true
+    switch.corner_lamp: true
+    switch.tower_lamp: true
+    switch.garden_lights: true
+    light.led_strip_2: true
+    # leds on
+- name: Movie
+  entities:
+    switch.bar_lamp: true
+    switch.corner_lamp: false
+    switch.tower_lamp: false
+    switch.garden_lights: true
+    light.led_strip_2: true
+- name: Dark downstairs
+  entities:
+    switch.bar_lamp: false
+    switch.corner_lamp: false
+    switch.tower_lamp: false
+    switch.garden_lights: false
+    light.led_strip_2: false
+- name: Away
+  entities:
+    light.all: false
+    # leds off
+- name: Office on
+  entities:
+    switch.desk: true
+    switch.desk_2: true
+    switch.star_light: true
+    light.led_strip: true
+- name: Office off
+  entities:
+    switch.desk: false
+    switch.desk_2: false
+    switch.star_light: false
+    light.led_strip: false

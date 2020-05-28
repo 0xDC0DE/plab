@@ -1,0 +1,82 @@
+# Make sensors out of input selects for presence status
+  - platform: template
+    sensors:
+      pieter_presence:
+        value_template: '{{ states.input_select.pieter_presence_status.state }}'
+        friendly_name: 'Pieter'
+      sarah_presence:
+        value_template: '{{ states.input_select.sarah_presence_status.state }}'
+        friendly_name: 'Sarah'
+      leo_presence:
+        value_template: '{{ states.input_select.leo_presence_status.state }}'
+        friendly_name: 'Leopold'
+      suki_presence:
+        value_template: '{{ states.input_select.suki_presence_status.state }}'
+        friendly_name: 'Suki'
+# Dark sky weather entity into sensors
+      dark_sky_temperature:
+        friendly_name: "Outside Temperature"
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('weather.dark_sky', 'temperature') }}"
+      dark_sky_humidity:
+        friendly_name: "Outside Humidity"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('weather.dark_sky', 'humidity') }}"
+      dark_sky_wind_speed:
+        friendly_name: "Wind Speed"
+        unit_of_measurement: 'km/h'
+        value_template: "{{ state_attr('weather.dark_sky', 'wind_speed') }}"
+# Input datetime as a sensor
+      front_door_last_opened:
+        friendly_name: "Front door last opened at"
+        value_template: "{{ states('input_datetime.front_door_last_opened')}}"
+      back_door_last_opened:
+        friendly_name: "Back door last opened at"
+        value_template: "{{ states('input_datetime.back_door_last_opened')}}"
+# Make sun into "nighttime" sensor for plots
+      nighttime:
+        value_template: '{% if is_state("sun.sun", "above_horizon") -%}0{%- else -%}1{%- endif %}'
+        friendly_name: 'Nighttime'
+# Washer sensors: one for power and one for running/not-running
+      washer_power:
+        friendly_name: 'Washer Power Usage'
+        unit_of_measurement: 'W'
+        value_template: '{{ state_attr("switch.washer", "current_power_w") }}'
+      dryer_power:
+        friendly_name: 'Dryer Power Usage'
+        unit_of_measurement: 'W'
+        value_template: '{{ state_attr("switch.dryer", "current_power_w") }}'
+      washer_status:
+        friendly_name: 'Washer Status'
+        value_template: "{% if states('sensor.washer_power')|float > 2 %}on{% else %}off{% endif %}"
+      dryer_status:
+        friendly_name: 'Dryer Status'
+        value_template: "{% if states('sensor.dryer_power')|float > 2 %}on{% else %}off{% endif %}"
+# Monitor Brix usage stats
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+      - type: network_in
+        arg: enp2s0
+      - type: network_out
+        arg: enp2s0
+      - type: throughput_network_in
+        arg: enp2s0
+      - type: throughput_network_out
+        arg: enp2s0
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+# Airvisual, API key expires every 12 months
+#- platform: airvisual
+#    api_key: !secret av_api_key
+#    show_on_map: false
+# illuminance sensor based on sun height and weather conditions
+  - platform: illuminance
+    name: Illuminance
+    entity_id: weather.dark_sky
