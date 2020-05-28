@@ -1,0 +1,108 @@
+title: Security
+icon: mdi:cctv
+path: security
+panel: true
+cards:
+  # Better layout control
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: >
+                 [[[
+                   if (entity.state == 'on')
+                     return "Front door is open";
+                   else
+                     return "Front door is closed";
+                 ]]]
+            icon: mdi:door-open
+            entity: binary_sensor.front_door_sensor
+            color_type: card
+            color: var(--primary-color)
+            styles:
+              card:
+                - height: 80px
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                icon: mdi:door-closed
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: >
+                 [[[
+                   if (entity.state == 'on')
+                     return "Back door is open";
+                   else
+                     return "Back door is closed";
+                 ]]]
+            icon: mdi:door-open
+            entity: binary_sensor.back_door_sensor
+            color_type: card
+            color: var(--primary-color)
+            styles:
+              card:
+                - height: 80px
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                icon: mdi:door-closed
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: custom:button-card
+        entity: input_datetime.back_door_last_opened
+        show_icon: false
+        show_state: true
+        layout: name_state
+      - type: custom:button-card
+        entity: input_datetime.front_door_last_opened
+        show_icon: false
+        show_state: true
+        layout: name_state
+      - type: picture-entity
+        entity: camera.patio
+        camera_view: live
+      - break
+      - type: picture-entity
+        entity: camera.nursery
+        camera_view: live
+      - type: custom:mini-graph-card
+        name: TEMPERATURE HATCHER
+        entities:
+          - entity: sensor.bedroom_climate_sensor
+            name: Hatcher
+          - entity: sensor.nighttime
+            color: gray
+            name: Night
+            show_line: false
+            show_points: false
+            show_legend: false
+            y_axis: secondary
+        show:
+          labels: true
+        hour24: true
+        hours_to_show: 72
+      - type: custom:mini-graph-card
+        name: HUMIDITY HATCHER
+        entities:
+          - entity: sensor.bedroom_climate_sensor_2
+            name: Hatcher
+          - entity: sensor.nighttime
+            color: gray
+            name: Night
+            show_line: false
+            show_points: false
+            show_legend: false
+            y_axis: secondary
+        show:
+          labels: true
+        hour24: true
+        hours_to_show: 72

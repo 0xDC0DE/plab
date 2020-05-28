@@ -1,0 +1,317 @@
+title: Lights
+icon: mdi:lightbulb
+path: light
+panel: true
+cards:
+  # Better layout control
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+      - type: custom:button-card
+        name: Downstairs Lights
+        entity: group.downstairs_lights
+        show_icon: false
+        color_type: card
+        color: var(--primary-color)
+        styles:
+          name:
+            - font-size: 15px
+            - padding: 1px
+        state:
+          - value: "off"
+            color: var(--medium-grey-color)
+            styles:
+              name:
+                - color: var(--disabled-text-color)
+              icon:
+                - color: var(--disabled-text-color)
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Bar Lamp
+            entity: light.bar_lamp
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Corner Lamp
+            entity: light.corner_lamp
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Tower Lamp
+            entity: light.tower_lamp
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Garden Lights
+            entity: light.garden_lights
+            color_type: card
+            color: var(--primary-color)
+            styles:
+              name:
+                - font-size: 15px
+                - padding: 1px
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.led_strip_2
+            toggle: true
+          - type: 'custom:rgb-light-card'
+            entity: light.led_strip_2
+            justify: around
+            colors:
+              #rgb values between 0 and 255
+              #brightnees between 0 and 255
+                - rgb_color:
+                      - 254
+                      - 255
+                      - 0
+                - rgb_color:
+                      - 255
+                      - 129
+                      - 1
+                - rgb_color:
+                      - 255
+                      - 6
+                      - 128
+                - rgb_color:
+                      - 70
+                      - 6
+                      - 255
+                - rgb_color:
+                      - 0
+                      - 255
+                      - 126
+      - type: custom:button-card
+        name: Bedroom Lights
+        entity: group.bedroom_lights
+        show_icon: false
+        color_type: card
+        color: var(--primary-color)
+        styles:
+          name:
+            - font-size: 15px
+            - padding: 1px
+        state:
+          - value: "off"
+            color: var(--medium-grey-color)
+            styles:
+              name:
+                - color: var(--disabled-text-color)
+              icon:
+                - color: var(--disabled-text-color)
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Bedlight
+            entity: light.bedlight
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Reading Light
+            entity: light.reading_light
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Bedroom Ceiling
+            entity: light.bedroom_ceiling_light
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: custom:button-card
+        name: Office Devices
+        entity: group.office_devices
+        show_icon: false
+        color_type: card
+        color: var(--primary-color)
+        styles:
+          name:
+            - font-size: 15px
+            - padding: 1px
+        state:
+          - value: "off"
+            color: var(--medium-grey-color)
+            styles:
+              name:
+                - color: var(--disabled-text-color)
+              icon:
+                - color: var(--disabled-text-color)
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Desk
+            entity: switch.desk
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Second Desk
+            entity: switch.second_desk
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Star Light
+            icon: mdi:lightbulb
+            entity: switch.star_light
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.led_strip
+            toggle: true
+          - type: 'custom:rgb-light-card'
+            entity: light.led_strip
+            justify: around
+            colors:
+              #rgb values between 0 and 255
+              #brightnees between 0 and 255
+                - rgb_color:
+                      - 254
+                      - 255
+                      - 0
+                - rgb_color:
+                      - 255
+                      - 129
+                      - 1
+                - rgb_color:
+                      - 255
+                      - 6
+                      - 128
+                - rgb_color:
+                      - 70
+                      - 6
+                      - 255
+                - rgb_color:
+                      - 0
+                      - 255
+                      - 126
+      - break
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Hall Light
+            entity: light.hall_light
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Bathroom LEDs
+            entity: switch.led_controller
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Stair Light
+            entity: light.hall_light
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: custom:xiaomi-vacuum-card
+        entity: vacuum.xiaomi_vacuum_cleaner
+        image: false
+        name: Robert Roborock Vacuum
+        labels: false
+        buttons: true
+

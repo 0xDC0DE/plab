@@ -1,0 +1,256 @@
+title: Settings
+icon: mdi:tune
+path: settings
+panel: true
+cards:
+  # Better layout control
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: input_datetime.vacuum_time_weekday
+            icon: mdi:robot-vacuum
+          - entity: input_datetime.vacuum_time_weekend
+            icon: mdi:robot-vacuum
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: M
+            show_icon: false
+            entity: input_boolean.automate_vacuum_monday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: T
+            show_icon: false
+            entity: input_boolean.automate_vacuum_tuesday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: W
+            show_icon: false
+            entity: input_boolean.automate_vacuum_wednesday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: T
+            show_icon: false
+            entity: input_boolean.automate_vacuum_thursday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: F
+            show_icon: false
+            entity: input_boolean.automate_vacuum_friday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: S
+            show_icon: false
+            entity: input_boolean.automate_vacuum_saturday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: S
+            show_icon: false
+            entity: input_boolean.automate_vacuum_sunday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - input_datetime.alarm_pieter
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Gradually turn on light
+            show_icon: false
+            entity: input_boolean.alarm_lights
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Turn on radio
+            show_icon: false
+            entity: input_boolean.alarm_radio
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: M
+            show_icon: false
+            entity: input_boolean.alarm_monday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: T
+            show_icon: false
+            entity: input_boolean.alarm_tuesday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: W
+            show_icon: false
+            entity: input_boolean.alarm_wednesday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: T
+            show_icon: false
+            entity: input_boolean.alarm_thursday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: F
+            show_icon: false
+            entity: input_boolean.alarm_friday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: S
+            show_icon: false
+            entity: input_boolean.alarm_saturday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: S
+            show_icon: false
+            entity: input_boolean.alarm_sunday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - break
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.guest_mode
+            icon: mdi:shield-account

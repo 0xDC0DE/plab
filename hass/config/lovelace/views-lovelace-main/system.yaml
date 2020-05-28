@@ -1,0 +1,119 @@
+title: System
+icon: mdi:desktop-classic
+path: system
+panel: true
+cards:
+  # Better layout control
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+      - type: entities
+        title: Docker Containers
+        show_header_toggle: false
+        entities:
+          - entity: sensor.docker_hass
+            name: Home Assistant
+            icon: mdi:docker
+          - entity: sensor.docker_ha_dockermon
+            name: HA Dockermon
+            icon: mdi:docker
+          - entity: sensor.docker_deconz
+            name: DeconZ
+            icon: mdi:docker
+          - entity: sensor.docker_nodered
+            name: Node-RED
+            icon: mdi:docker
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.glances_cpu_used
+            name: CPU
+            severity:
+              green: 0
+              yellow: 45
+              red: 85
+          - type: gauge
+            entity: sensor.glances_ram_used_percent
+            name: Memory
+            severity:
+              green: 0
+              yellow: 45
+              red: 85
+          - type: gauge
+            entity: sensor.glances_used_percent
+            name: Disk
+            severity:
+              green: 0
+              yellow: 45
+              red: 85
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            hours_to_show: 24
+            height: 50
+            font_size: 60
+            state: false
+            entities:
+              - entity: sensor.glances_cpu_used
+                name: CPU Use
+          - type: custom:mini-graph-card
+            hours_to_show: 24
+            height: 50
+            font_size: 60
+            state: false
+            entities:
+              - entity: sensor.glances_ram_used_percent
+                name: Memory Use
+          - type: custom:mini-graph-card
+            hours_to_show: 24
+            height: 50
+            font_size: 60
+            state: false
+            entities:
+              - entity: sensor.glances_used_percent
+                name: Disk use
+      - break
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            line_width: 2
+            state: false
+            line_color: blue
+            hours_to_show: 24
+            entities:
+              - entity: sensor.glances_core_0_temp
+                name: Core 0
+          - type: custom:mini-graph-card
+            line_width: 2
+            line_color: red
+            state: false
+            hours_to_show: 24
+            entities:
+              - entity: sensor.glances_core_1_temp
+                name: Core 1
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            line_width: 2
+            state: false
+            line_color: green
+            hours_to_show: 24
+            entities:
+              - entity: sensor.glances_core_2_temp
+                name: Core 2
+          - type: custom:mini-graph-card
+            line_width: 2
+            state: false
+            hours_to_show: 24
+            entities:
+              - entity: sensor.glances_core_3_temp
+                name: Core 3
+      - type: custom:mini-graph-card
+        name: RESOURCES
+        hours_to_show: 24
+        state: false
+        entities:
+          - entity: sensor.speedtest_download
+            name: Download Speed
+          - entity: sensor.speedtest_upload
+            name: Upload Speed
