@@ -1,0 +1,74 @@
+version: '3.1'
+networks:
+  traefik2_proxy:
+    external:
+      name: traefik2_proxy
+  default:
+    driver: bridge
+
+services:
+  hass:
+    container_name: hass
+    image: homeassistant/home-assistant:stable
+    volumes:
+      - $USERDIR/hass/config:/config
+    environment:
+      - TZ=Europe/Brussels
+    security_opt:
+      - no-new-privileges:true
+    # Google Home Integration only works with network_mode
+    # but traefik2_proxy network is needed for reverse proxy to work properly
+    # --> Resolved by using file provider to add reverse proxy settings for hass
+    network_mode: host
+    restart: unless-stopped
+    ports:
+      - "8123:8123"
+  nodered:
+    container_name: nodered
+    restart: unless-stopped
+    image: nodered/node-red-docker:v8
+    environment:
+      - TZ=Europe/Brussels
+    depends_on:
+      - "hass"
+    user: root
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik2_proxy
+    volumes:
+      - $USERDIR/hass/nodered/user:/data
+      - /etc/localtime:/etc/localtime:ro
+      - /root/.ssh:/root/.ssh:ro
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.nodered-rtr.entrypoints=https"
+      - "traefik.http.routers.nodered-rtr.rule=Host(`nodered.$DOMAINNAME`)"
+      - "traefik.http.routers.nodered-rtr.tls=true"
+      ## Middlewares
+      - "traefik.http.routers.nodered-rtr.middlewares=chain-oauth@file" # Google OAuth 2.0
+      ## HTTP Services
+      - "traefik.http.routers.nodered-rtr.service=nodered-svc"
+      - "traefik.http.services.nodered-svc.loadbalancer.server.port=1880"
+  deconz:
+    image: marthoc/deconz
+    container_name: deconz
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    network_mode: host
+    ports:
+      - "8880:8880"
+    volumes:
+      - $USERDIR/hass/deconz/opt/deconz:/root/.local/share/dresden-elektronik/deCONZ
+    devices:
+      - /dev/ttyACM0
+    environment:
+      - DECONZ_WEB_PORT=8880
+      - DECONZ_WS_PORT=4443
+      - DEBUG_INFO=1
+      - DEBUG_APS=0
+      - DEBUG_ZCL=0
+      - DEBUG_ZDP=0
+      - DEBUG_OTAU=0
