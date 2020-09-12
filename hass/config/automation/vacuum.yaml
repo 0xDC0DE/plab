@@ -1,0 +1,152 @@
+- id: vacuum_weekdays
+  alias: "Vacuum weekdays"
+  description: "Automate vacuum on weekdays"
+  trigger:
+    - platform: template
+      value_template: "{{ states('sensor.time') == (state_attr('input_datetime.vacuum_time_weekday', 'timestamp') | int | timestamp_custom('%H:%M', False)) }}"
+  action:
+    # Do not trigger if already started manually today
+    - condition: state
+      entity_id: 'input_boolean.vacuumed_today'
+      state: 'off'
+    # Check if vacuuming is enabled for this day of the week
+    # TODO: Turn a day like this into a script with data_template, that would be much more readable
+    - choose:
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Monday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.automate_vacuum_monday') == 'on'}}"
+        sequence:
+          service: vacuum.start
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Tuesday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.automate_vacuum_tuesday') == 'on'}}"
+        sequence:
+          service: vacuum.start
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Wednesday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.automate_vacuum_wednesday') == 'on'}}"
+        sequence:
+          service: vacuum.start
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Thursday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.automate_vacuum_thursday') == 'on'}}"
+        sequence:
+          service: vacuum.start
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Friday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.automate_vacuum_friday') == 'on'}}"
+        sequence:
+          service: vacuum.start
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Saturday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.automate_vacuum_saturday') == 'on'}}"
+        sequence:
+          service: vacuum.start
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Sunday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.automate_vacuum_sunday') == 'on'}}"
+        sequence:
+          service: vacuum.start
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+- id: vacuum_cleaning
+  alias: "Vacuum cleaning"
+  description: Notify mobiles that cleaning has started
+  trigger:
+    platform: state
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    to: "cleaning"
+  action:
+    # This boolean is used to notify mobiles AFTER cleaning as well
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.cleaned_before_docking
+    - service: script.conditional_notify_mobiles
+      data:
+        tag: "vacuum"
+        message: "Robert started cleaning."
+        title: "Beep boop!"
+- id: vacuum_error
+  alias: "Vacuum error"
+  description: Notify mobiles that an error occured with the vacuum
+  trigger:
+    platform: state
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    to: "error"
+  action:
+    - service: script.conditional_notify_mobiles
+      data:
+        tag: "vacuum"
+        message: "Robert is stuck and needs help! 😨"
+        title: "Beep boop!"
+- id: vacuum_returning
+  alias: "Vacuum returning"
+  description: Notify mobiles that cleaning is finished
+  trigger:
+    platform: state
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    to: "returning"
+  action:
+    # Do not trigger this if we for example emptied the dustbin and then let it dock automatically
+    - condition: state
+      entity_id: 'input_boolean.cleaned_before_docking'
+      state: 'on'
+    - service: script.conditional_notify_mobiles
+      data:
+        tag: "vacuum"
+        message: "Robert finished cleaning, returning to dock."
+        title: "Beep boop!"
+- id: vacuum_docked
+  alias: "Vacuum docked"
+  description: Notify mobiles and log cleaning time
+  trigger:
+    platform: state
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    to: "docked"
+  action:
+    # Do not trigger this if we for example emptied the dustbin and then docked it again
+    - condition: state
+      entity_id: 'input_boolean.cleaned_before_docking'
+      state: 'on'
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.cleaned_before_docking
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.cleaned_before_docking
+    - service: script.conditional_notify_mobiles
+      data:
+        tag: "vacuum"
+        message: "Robert has finished cleaning after {{state_attr('vacuum.xiaomi_vacuum_cleaner', 'cleaning_time')}} minutes \uD83D\uDE34"
+        title: "Beep boop!"
+    # Only if it ran till more or less till the end, not if we stopped it, or did spot cleaning somewhere
+    - condition: template
+      value_template: "{{state_attr('vacuum.xiaomi_vacuum_cleaner', 'cleaning_time')|int > 30}}"
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vacuumed_today
+- id: vacuum_day_reset
+  alias: "Vacuum day reset"
+  description: Reset the vacuumed_today boolean
+  trigger:
+    - platform: template
+      # I only took 1 am because I don't know for sure if midnight is 0h or 24h and I am too lazy
+      value_template: "{{states('sensor.time') == '01:00'}} "
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vacuumed_today

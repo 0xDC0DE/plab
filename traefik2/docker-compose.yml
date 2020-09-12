@@ -16,6 +16,8 @@ services:
     image: traefik:chevrotin # the chevrotin tag refers to v2.2.x
     restart: unless-stopped
     command: # CLI arguments
+# for exposing containers that are configured with host networking (e.g. homeassistant)
+#      - --add-host=host.docker.internal:172.17.0.1
       - --global.checkNewVersion=true
       - --global.sendAnonymousUsage=true
       - --entryPoints.http.address=:80
@@ -45,8 +47,6 @@ services:
       - --certificatesResolvers.dns-cloudflare.acme.email=$CLOUDFLARE_EMAIL
       - --certificatesResolvers.dns-cloudflare.acme.storage=/acme.json
       - --certificatesResolvers.dns-cloudflare.acme.dnsChallenge.provider=cloudflare
-# for exposing containers that are configured with host networking (e.g. homeassistant)
-#      - --add-host=host.docker.internal:172.17.0.1
     networks:
       - traefik2_proxy
     security_opt:

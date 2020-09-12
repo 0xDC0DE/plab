@@ -15,6 +15,7 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret time_zone
 
+#Needed again when using Traefik
 http:
   # No longer needed when using Traefik
   # base_url: !secret base_url
@@ -63,9 +64,8 @@ conversation:
 group: !include groups.yaml
 scene: !include scenes.yaml
 
-# not used for now, automations are done through nodered
-automation: !include automations.yaml
-script: !include scripts.yaml
+automation: !include_dir_merge_list automation
+script: !include_dir_merge_named scripts
 
 # Enables support for tracking state changes over time
 history:
@@ -87,11 +87,16 @@ logger: # https://www.home-assistant.io/components/logger/
 ####################
 # WEATHER
 ####################
-# TODO: migrage to WUnderground or something else, darksky is bought by apple
+# darksky is bought by apple
 weather:
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    mode: daily
+#  - platform: darksky
+#    api_key: !secret darksky_api_key
+#    mode: daily
+# - platform: buienradar
+  - platform: openweathermap
+    api_key: !secret openweathermap_api_key
+    mode: freedaily
+
 sun:
 
 ####################
@@ -156,8 +161,11 @@ light:
     name: Corner Lamp
     entity_id: switch.corner_lamp
   - platform: switch
-    name: Led lights
+    name: Led Lights
     entity_id: switch.led_controller
+  - platform: switch
+    name: Ivar Lamp
+    entity_id: switch.ivar_lamp
 
 # TPLINK WIFI devices
 tplink:
@@ -186,6 +194,18 @@ tuya:
 tts:
   - platform: google_translate
     service_name: google_say
+
+cast:
+  media_player:
+    # Google Home Mini
+    - host: !secret ghome_mini_1_ip
+    - host: !secret ghome_mini_2_ip
+      # Google Chromecast: Beamer
+    - host: !secret chromecast_ip
+      # Google Chromecast Audio: Living Room Stereo
+    - host: !secret chromecast_audio_ip
+      # Lenovo kitchen tablet
+    - host: !secret lenovo_tab_ip
 
 # Expose to Google Assistant
 google_assistant:
@@ -229,6 +249,8 @@ google_assistant:
     switch.bed_light:
       expose: false
     switch.garden_lights:
+      expose: false
+    switch.ivar_lamp:
       expose: false
 
 ####################
@@ -283,11 +305,4 @@ camera:
     stream_source: !secret reolink_2_stream
     name: "Nursery"
 
-####################
-# SYSTEM MONITORING
-####################
-# TODO: update to work with Traefik
-glances:
-  - host: 192.168.0.20
-
-speedtestdotnet:
+stream:

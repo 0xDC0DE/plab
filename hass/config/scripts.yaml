@@ -1,0 +1,8 @@
+example_script:
+  alias: example script
+  mode: single
+  sequence:
+  - device_id: 6ec062671cf04aa99e4d5395a09bb401
+    domain: switch
+    entity_id: switch.corner_lamp
+    type: turn_on

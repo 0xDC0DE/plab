@@ -1,0 +1,26 @@
+- id: washer_done
+  alias: "Washer done"
+  description: Notify mobiles that washer is done cleaning clothes
+  trigger:
+    platform: state
+    entity_id: sensor.washer_status
+    to: "off"
+  action:
+    - service: script.conditional_notify_mobiles
+      data:
+        message: "Wally finished cleaning laundry, at {{states('sensor.time')}} 💦"
+        title: "Wish woosh!"
+        tag: "washer"
+- id: dryer_done
+  alias: "Dryer done"
+  description: Notify mobiles that dryer is done drying clothes
+  trigger:
+    platform: state
+    entity_id: sensor.dryer_status
+    to: "off"
+  action:
+    - service: script.conditional_notify_mobiles
+      data:
+        message: "Drew finished drying laundry at {{mytime}} 🌪"
+        title: "Wish woosh!"
+        tag: "dryer"

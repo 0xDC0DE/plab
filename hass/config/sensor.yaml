@@ -1,3 +1,10 @@
+# Access to time and date for automation triggers 
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'time_date'
 # Make sensors out of input selects for presence status
   - platform: template
     sensors:
@@ -34,6 +41,7 @@
         friendly_name: "Back door last opened at"
         value_template: "{{ states('input_datetime.back_door_last_opened')}}"
 # Make sun into "nighttime" sensor for plots
+# --> replaced by sun elevation sensor
       nighttime:
         value_template: '{% if is_state("sun.sun", "above_horizon") -%}0{%- else -%}1{%- endif %}'
         friendly_name: 'Nighttime'
@@ -52,27 +60,52 @@
       dryer_status:
         friendly_name: 'Dryer Status'
         value_template: "{% if states('sensor.dryer_power')|float > 2 %}on{% else %}off{% endif %}"
-# Monitor Brix usage stats
-  - platform: systemmonitor
-    resources:
-      - type: disk_use_percent
-        arg: /
-      - type: memory_use_percent
-      - type: processor_use
-      - type: last_boot
-      - type: network_in
-        arg: enp2s0
-      - type: network_out
-        arg: enp2s0
-      - type: throughput_network_in
-        arg: enp2s0
-      - type: throughput_network_out
-        arg: enp2s0
-  - platform: time_date
-    display_options:
-      - 'time'
-      - 'date'
+# Sun elevation as a sensor
+      solar_elevation:
+        friendly_name: "Solar Elevation"
+        unit_of_measurement: '°'
+        value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+# Weather status icon name
+      weather_icon:
+        friendly_name: "mdi Real Weather Icon"
+        icon_template: >-
+            {% if is_state("weather.openweathermap","sunny") %} mdi:weather-sunny
+            {% elif is_state("weather.openweathermap","clear-night") %} mdi:weather-night
+            {% elif is_state("weather.openweathermap","cloudy") %} mdi:weather-cloudy
+            {% elif is_state("weather.openweathermap","fog") %} mdi:weather-fog
+            {% elif is_state("weather.openweathermap","hail") %} mdi:weather-hail
+            {% elif is_state("weather.openweathermap","lightning") %} mdi:weather-lightning
+            {% elif is_state("weather.openweathermap","lightning-rainy") %} mdi:weather-lightning-rainy
+            {% elif is_state("weather.openweathermap","partly-cloudy") %} mdi:weather-partly-cloudy
+            {% elif is_state("weather.openweathermap","partly-cloudy-night") %} mdi:weather-night-partly-cloudy
+            {% elif is_state("weather.openweathermap","pouring") %} mdi:weather-pouring
+            {% elif is_state("weather.openweathermap","rainy") %} mdi:weather-rainy
+            {% elif is_state("weather.openweathermap","snowy") %} mdi:weather-snowy
+            {% elif is_state("weather.openweathermap","snowy-rainy") %} mdi:weather-snowy-rainy
+            {% elif is_state("weather.openweathermap","windy") %} mdi:weather-windy
+            {% elif is_state("weather.openweathermap","windy-variant") %} mdi:weather-windy-variant
+            {% elif is_state("weather.openweathermap","exceptional") %} mdi:weather-cloudy-alert
+            {% endif %}
+        value_template: >-
+            {% if is_state("weather.openweathermap","sunny") %} weather-sunny
+            {% elif is_state("weather.openweathermap","clear-night") %} weather-night
+            {% elif is_state("weather.openweathermap","cloudy") %} weather-cloudy
+            {% elif is_state("weather.openweathermap","fog") %} weather-fog
+            {% elif is_state("weather.openweathermap","hail") %} weather-hail
+            {% elif is_state("weather.openweathermap","lightning") %} weather-lightning
+            {% elif is_state("weather.openweathermap","lightning-rainy") %} weather-lightning-rainy
+            {% elif is_state("weather.openweathermap","partly-cloudy") %} weather-partly-cloudy
+            {% elif is_state("weather.openweathermap","partly-cloudy-night") %} weather-night-partly-cloudy
+            {% elif is_state("weather.openweathermap","pouring") %} weather-pouring
+            {% elif is_state("weather.openweathermap","rainy") %} weather-rainy
+            {% elif is_state("weather.openweathermap","snowy") %} weather-snowy
+            {% elif is_state("weather.openweathermap","snowy-rainy") %} weather-snowy-rainy
+            {% elif is_state("weather.openweathermap","windy") %} weather-windy
+            {% elif is_state("weather.openweathermap","windy-variant") %} weather-windy-variant
+            {% elif is_state("weather.openweathermap","exceptional") %} weather-cloudy-alert
+            {% endif %}
 # Airvisual, API key expires every 12 months
+# --> replaced by using UI Integration
 #- platform: airvisual
 #    api_key: !secret av_api_key
 #    show_on_map: false
@@ -80,3 +113,13 @@
   - platform: illuminance
     name: Illuminance
     entity_id: weather.dark_sky
+# OpenWeatherMap as sensor
+ #- platform: openweathermap
+ #  api_key: !secret openweathermap_api_key
+ #  monitored_conditions:
+ #    - weather
+ #    - temperature
+ #    - wind_speed
+ #    - humidity
+ #    - clouds
+ #    - weather_code

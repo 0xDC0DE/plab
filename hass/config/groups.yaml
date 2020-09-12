@@ -18,7 +18,7 @@ downstairs_lights:
     - light.corner_lamp
     - light.tower_lamp
     - light.led_strip_2
-    - light.garden_lights
+    - light.ivar_lamp
 people:
   name: People
   entities:
@@ -34,10 +34,16 @@ motion_hallway:
   entities:
     - binary_sensor.motion_sensor_upstairs
     - binary_sensor.motion_sensor_downstairs
+motion_stairway:
+  name: Motion Stairway
+  entities:
+    - binary_sensor.motion_sensor_office
+    - binary_sensor.motion_sensor_stairs
 office_devices:
   name: Office Devices
   entities:
     - switch.star_light
     - switch.desk
-    - swith.second_desk
+    - switch.second_desk
     - light.led_strip
+    - light.red_lamp

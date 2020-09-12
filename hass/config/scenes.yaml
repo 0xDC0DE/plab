@@ -4,8 +4,8 @@
     switch.corner_lamp: true
     switch.tower_lamp: true
     switch.garden_lights: true
+    switch.ivar_lamp: true
     light.led_strip_2: true
-    # leds on
 - name: Movie
   entities:
     switch.bar_lamp: true
@@ -13,6 +13,7 @@
     switch.tower_lamp: false
     switch.garden_lights: true
     light.led_strip_2: true
+    switch.ivar_lamp: false
 - name: Dark downstairs
   entities:
     switch.bar_lamp: false
@@ -20,6 +21,7 @@
     switch.tower_lamp: false
     switch.garden_lights: false
     light.led_strip_2: false
+    switch.ivar_lamp: false
 - name: Away
   entities:
     light.all: false
@@ -27,12 +29,47 @@
 - name: Office on
   entities:
     switch.desk: true
-    switch.desk_2: true
+    switch.second_desk: true
     switch.star_light: true
+    light.red_lamp: true
     light.led_strip: true
 - name: Office off
   entities:
     switch.desk: false
-    switch.desk_2: false
+    switch.second_desk: false
     switch.star_light: false
     light.led_strip: false
+    light.red_lamp: false
+- name: Bedroom cosy
+  entities:
+    light.bedlight: true
+    light.bedroom_ceiling_light:
+      state: "on"
+      rgb_color: [255, 127, 0]
+      brightness: 135
+    light.reading_light:
+      state: "on"
+      rgb_color: [255, 63, 0]
+      brightness: 145
+- name: Bedroom bright
+  entities:
+    light.bedlight: true
+    light.bedroom_ceiling_light:
+      state: "on"
+      rgb_color: [255, 255, 255]
+      brightness: 255
+    light.reading_light:
+      state: "on"
+      rgb_color: [255, 255, 255]
+      brightness: 255
+- name: Bedroom dark
+  entities:
+    light.bedlight: false
+    light.bedroom_ceiling_light:
+      state: "on"
+      rgb_color: [255, 127, 0]
+      brightness: 0
+    light.reading_light:
+      state: "on"
+      rgb_color: [255, 63, 0]
+      brightness: 0

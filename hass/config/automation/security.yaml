@@ -1,0 +1,26 @@
+- id: back_door_log
+  alias: "back door log"
+  description: "Logs last time back door was opened"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.back_door_sensor
+      from: "on"
+      to: "off"
+  action:
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.back_door_last_opened
+      data_template:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+- id: front_door_log
+  alias: "front door log"
+  description: "Logs last time front door was opened"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door_sensor
+      from: "on"
+      to: "off"
+  action:
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.front_door_last_opened
+      data_template:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"

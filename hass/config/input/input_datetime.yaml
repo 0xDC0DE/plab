@@ -8,6 +8,14 @@ vacuum_time_weekend:
   has_date: false
   has_time: true
   initial: '14:00'
+vacuum_last_started:
+  name: Vacuum last started at
+  has_date: true
+  has_time: true
+vacuum_last_finished:
+  name: Vacuum last finished at
+  has_date: true
+  has_time: true
 
 front_door_last_opened:
   name: Front door last opened at

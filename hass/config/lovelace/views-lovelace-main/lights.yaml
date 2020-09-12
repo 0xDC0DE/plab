@@ -67,8 +67,8 @@ cards:
                   icon:
                     - color: var(--disabled-text-color)
           - type: custom:button-card
-            name: Garden Lights
-            entity: light.garden_lights
+            name: Ivar Lamp
+            entity: light.ivar_lamp
             color_type: card
             color: var(--primary-color)
             styles:

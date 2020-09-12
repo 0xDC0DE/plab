@@ -1,0 +1,72 @@
+- id: alarm_beta
+  alias: "Beta version of alarm for debugging purpose"
+  trigger:
+    - platform: template
+      value_template: >
+        {% set current_time = (now().strftime('%s')|int-(10*60))|timestamp_custom('%H:%M',false) %}
+        {% set a_time = state_attr('input_datetime.alarm_pieter','timestamp')|int|timestamp_custom('%H:%M',false) %}
+        {{ current_time == a_time }}
+  action:
+    service: notify.mobile_app_pieter
+    data:
+      message: "Alarm triggered"
+      title: "Beta Alarm"
+      data:
+        tag: "beta_alarm"
+- id: alarm
+  alias: "Alarm"
+  description: "Activate lights and radio starting 10 minutes before alarm time"
+  trigger:
+    - platform: template
+      value_template: "{{(now().strftime('%s')|int+(10*60))|timestamp_custom('%H:%M',false)==(state_attr('input_datetime.alarm_pieter','timestamp')|int|timestamp_custom('%H:%M',false))}}"
+  action:
+    - choose:
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Monday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.alarm_monday') == 'on'}}"
+        sequence:
+          service: script.wake_up_sequence
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Tuesday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.alarm_tuesday') == 'on'}}"
+        sequence:
+          service: script.wake_up_sequence
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Wednesday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.alarm_wednesday') == 'on'}}"
+        sequence:
+          service: script.wake_up_sequence
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Thursday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.alarm_thursday') == 'on'}}"
+        sequence:
+          service: script.wake_up_sequence
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Friday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.alarm_friday') == 'on'}}"
+        sequence:
+          service: script.wake_up_sequence
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Saturday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.alarm_saturday') == 'on'}}"
+        sequence:
+          service: script.wake_up_sequence
+      - conditions:
+        - condition: template
+          value_template: "{{ now().strftime('%A') == 'Sunday' }}"
+        - condition: template
+          value_template: "{{ states('input_boolean.alarm_sunday') == 'on'}}"
+        sequence:
+          service: script.wake_up_sequence

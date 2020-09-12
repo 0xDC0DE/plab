@@ -1,0 +1,109 @@
+# BEDROOM
+# #######
+- id: bedroom_switch_toggle
+  alias: Bedroom switch toggle
+  description: On single press toggle between scenes Dark and Cosy.
+  trigger:
+  - event_data:
+      event: 1002
+      id: bedroom_switch
+    event_type: deconz_event
+    platform: event
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: group.bedroom_lights
+        state: 'on'
+      sequence:
+      - service: script.scene_bedroom_dark
+    - conditions:
+      - condition: state
+        entity_id: group.bedroom_lights
+        state: 'off'
+      sequence:
+      - service: script.scene_bedroom_cosy
+  mode: single
+- id: bedroom_switch_long_press
+  alias: Bedroom long press
+  description: On long press, turn lights bright
+  trigger:
+  - event_data:
+      event: 1001
+      id: bedroom_switch
+    event_type: deconz_event
+    platform: event
+  action:
+  - service: script.scene_bedroom_bright
+  mode: single
+# LIVING ROOM
+# ###########
+- id: living_room_siwtch_toggle
+  alias: Living room switch toggle
+  description: On single press toggle between scenes Dark and Bright.
+  trigger:
+  - event_data:
+      event: 1002
+      id: living_room_switch
+    event_type: deconz_event
+    platform: event
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: group.downstairs_lights
+        state: 'on'
+      sequence:
+        service: script.scene_dark_downstairs
+    - conditions:
+      - condition: state
+        entity_id: group.downstairs_lights
+        state: 'off'
+      sequence:
+        service: script.scene_activity
+# OFFICE
+# ######
+- id: office_switch_toggle
+  alias: Office switch toggle
+  description: On single press toggle between scenes office off and office on.
+  trigger:
+  - event_data:
+      event: 1002
+      id: office_switch
+    event_type: deconz_event
+    platform: event
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: group.office_devices
+        state: 'on'
+      sequence:
+        - service: script.scene_office_off
+    - conditions:
+      - condition: state
+        entity_id: group.office_devices
+        state: 'off'
+      sequence:
+        - service: script.scene_office_on
+  mode: single
+# DOORBELL
+# ########
+- id: doorbell
+  alias: Doorbell
+  description: Play sound everywhere, alert mobile phones, and flash LED strips
+  trigger:
+  - event_data:
+      event: 1002
+      id: doorbell
+    event_type: deconz_event
+    platform: event
+  action:
+    - service: script.play_doorbell
+    - service: script.conditional_notify_mobiles
+      data:
+        tag: "doorbell"
+        message: "Someone rang the doorbell 🔔"
+        title: "Ding dong!"
+    - service: script.doorbell_flash_and_restore
+  mode: single

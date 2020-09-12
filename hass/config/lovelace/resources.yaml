@@ -24,7 +24,7 @@
   type: module
 - url: /local/custom_ui/layout-card/layout-card.js
   type: module
-- url: /local/custom_ui/button-card/button-card.js
+- url: /local/custom_ui/button-card/button-card.js?v=3.3.6
   type: module
 - url: /local/custom_ui/fold-entity-row/fold-entity-row.js
   type: module
@@ -33,4 +33,6 @@
 - url: /local/custom_ui/card-mod/card-mod.js?v=0.0.1
   type: module
 - url: /local/custom_ui/custom-header/custom-header.js?v=0.0.1
+  type: module
+- url: /local/custom_ui/swipe-card/swipe-card.js
   type: module

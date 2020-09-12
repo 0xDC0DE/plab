@@ -5,11 +5,12 @@ custom_header:
   tab_indicator_color: 'var(--primary-text-color)'
   background: 'var(--primary-background-color)'
   compact_mode: true
+  footer_mode: true
 views:
   # Including separately instead of the yaml files directly allows for easier reordering of the tabs (instead of renaming files for their order)
-  - !include lovelace/views-lovelace-main/lights.yaml
-  - !include lovelace/views-lovelace-main/climate.yaml
-  - !include lovelace/views-lovelace-main/security.yaml
-  - !include lovelace/views-lovelace-main/settings.yaml
-  - !include lovelace/views-lovelace-main/system.yaml
   - !include lovelace/views-lovelace-soft/main.yaml
+  - !include lovelace/views-lovelace-soft/lights.yaml
+  - !include lovelace/views-lovelace-soft/climate.yaml
+  - !include lovelace/views-lovelace-soft/security.yaml
+  - !include lovelace/views-lovelace-soft/settings.yaml
+    #- !include lovelace/views-lovelace-main/system.yaml
