@@ -1,5 +1,4 @@
 # These are used for non-binary presence detection
-
 pieter_presence_status:
   name: Pieter
   options:

@@ -1,8 +1,3 @@
-# Input booleans are being used to "trigger" Node-Red automations and remember automation states
-
-# Google Assistant can be used to flip an input boolean, a flipped input boolean starts the automation
-# The automation performs some tasks or answers some text, and also flips the boolean back
-
 # Non Binary Presence Detection switches this on and off, it is used for light automations
 expect_device_tracker_arrival_pieter:
   initial: off
@@ -26,11 +21,6 @@ automate_vacuum_saturday:
   initial: on
 automate_vacuum_sunday:
   initial: on
-
-skip_when_home:
-  initial: off
-skip_when_baby_monitor_on:
-  initial: off
 
 vacuumed_today:
   initial: off
