@@ -13,7 +13,7 @@ services:
     volumes:
       - $USERDIR/hass/config:/config
     environment:
-      - TZ=Europe/Brussels
+      - TZ=$TZ
     security_opt:
       - no-new-privileges:true
     # Google Home Integration only works with network_mode
@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     image: nodered/node-red-docker:v8
     environment:
-      - TZ=Europe/Brussels
+      - TZ=$TZ
     depends_on:
       - "hass"
     user: root
