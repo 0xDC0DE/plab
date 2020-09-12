@@ -14,8 +14,6 @@ services:
       - traefik2_proxy
     security_opt:
       - no-new-privileges:true
-#    ports:
-#      - "$PORTAINER_PORT:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - $USERDIR/docker/portainer/data:/data

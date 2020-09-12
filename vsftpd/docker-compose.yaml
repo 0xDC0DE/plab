@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  vsftpd:
+    container_name: vsftpd
+    restart: unless-stopped
+    image: fauria/vsftpd:latest
+    security_opt:
+      - no-new-privileges:true
+    network_mode: host
+    volumes:
+      - $HOME/vsftpd/data:/home/vsftpd
+    ports:
+      - 20:20
+      - 21:21
+      - 21100-21110:21100-21110
