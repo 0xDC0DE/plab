@@ -10,8 +10,6 @@ services:
     restart: unless-stopped
     networks:
       - traefik2_proxy
-    #ports:
-    #  - "8008:80"
     security_opt:
       - no-new-privileges:true
     volumes:
@@ -26,7 +24,6 @@ services:
       - "traefik.http.routers.heimdall-rtr.entrypoints=https"
       - "traefik.http.routers.heimdall-rtr.rule=Host(`$DOMAINNAME`, `www.$DOMAINNAME`)"
       - "traefik.http.routers.heimdall-rtr.tls=true"
-#      - "traefik.http.routers.heimdall-rtr.tls.certresolver=dns-cloudflare"
       ## Middlewares
       - "traefik.http.routers.heimdall-rtr.middlewares=chain-oauth@file"
       ## HTTP Services
