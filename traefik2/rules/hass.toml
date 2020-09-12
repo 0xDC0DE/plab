@@ -1,0 +1,23 @@
+[http.routers]
+   # Define a connection between requests and services
+     [http.routers.hass-lan-rtr]
+        rule = "Host(`hass.plab.be`)"
+        entrypoints = ["https"]
+        service = "hass-lan-svc"
+     [http.routers.hass-lan-rtr.tls]
+        certResolver = "le"
+     [http.routers.deconz-lan-rtr]
+        rule = "Host(`deconz.plab.be`)"
+        entrypoints = ["https"]
+        service = "deconz-lan-svc"
+     [http.routers.deconz-lan-rtr.tls]
+        certResolver = "le"
+
+ [http.services]
+        # Define how to reach an existing service on our infrastructure
+        [http.services.hass-lan-svc.loadBalancer]
+           [[http.services.hass-lan-svc.loadBalancer.servers]]
+             url = "http://192.168.0.20:8123"
+        [http.services.deconz-lan-svc.loadBalancer]
+           [[http.services.deconz-lan-svc.loadBalancer.servers]]
+             url = "http://192.168.0.20:8880"
