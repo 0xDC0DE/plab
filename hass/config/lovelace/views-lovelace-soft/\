@@ -1,0 +1,177 @@
+title: Home
+icon: mdi:home
+path: home
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          # Entity to control - First button
+          - entity: light.bar_lamp
+            icon: 'mdi:lamp'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+        # Please change the entities inside to match the entity to be controlled
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('light.family_room_lamp', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.5),5px 5px 8px 0 rgba(0,0,0,.03);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.family_room_lamp', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.15);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            icon: mdi:lightbulb-multiple
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: |
+                  # Bedroom Lights
+                style: |
+                  ha-card {
+                    height: 20px;
+                    --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
+                    box-shadow: 2px 2px rgba(0,0,0,0.0);
+                  }
+                  h1 {
+                    font-size: 20px;
+                    font-weight: bold;
+                    font-family: Helvetica;
+                    letter-spacing: '-0.01em';
+                  }
+              - type: markdown
+                content: >
+                      # There are 
+                      currently no  
+                      lights on
+                style: |
+                  ha-card {
+                  --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
+                  box-shadow: 2px 2px rgba(0,0,0,0.0);
+                     }
+                  h1 {
+                    font-size: 15px;
+                    font-weight: thin;
+                    font-family: Helvetica;
+                    letter-spacing: '-0.01em';
+                  }
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            icon: mdi:movie-open
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: |
+                  # Movie
+                style: |
+                  ha-card {
+                    height: 20px;
+                    --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
+                    box-shadow: 2px 2px rgba(0,0,0,0.0);
+                  }
+                  h1 {
+                    font-size: 20px;
+                    font-weight: bold;
+                    font-family: Helvetica;
+                    letter-spacing: '-0.01em';
+                  }
+              - type: markdown
+                content: >
+                      # Turns of some lights and dims others for a nice movie watching experience
+                style: |
+                  ha-card {
+                  --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
+                  box-shadow: 2px 2px rgba(0,0,0,0.0);
+                     }
+                  h1 {
+                    font-size: 15px;
+                    font-weight: thin;
+                    font-family: Helvetica;
+                    letter-spacing: '-0.01em';
+                  }
+
+
+

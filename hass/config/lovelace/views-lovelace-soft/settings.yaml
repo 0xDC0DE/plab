@@ -1,0 +1,284 @@
+title: Settings
+icon: mdi:tune
+path: settings
+panel: true
+cards:
+  # Better layout control
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+            margin: 10px;
+            box-shadow:
+              {% if is_state('sun.sun', 'above_horizon') %}
+                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+              {% elif is_state('sun.sun', 'below_horizon') %}
+                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+              {% endif %}
+          }
+        entities:
+          - entity: input_datetime.vacuum_time_weekday
+            icon: mdi:robot-vacuum
+          - entity: input_datetime.vacuum_time_weekend
+            icon: mdi:robot-vacuum
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: M
+            show_icon: false
+            entity: input_boolean.automate_vacuum_monday
+            tap_action:
+              action: call-service
+              service: input_boolean.toggle
+              service_data:
+                entity_id: input_boolean.automate_vacuum_monday
+            style: |
+              ha-card {
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('input_boolean.automate_vacuum_monday', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('input_boolean.automate_vacuum_monday', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('input_boolean.automate_vacuum_monday', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.9), inset 4px 4px 12px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('input_boolean.automate_vacuum_monday', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% endif %}
+              }
+          - type: custom:button-card
+            name: T
+            show_icon: false
+            entity: input_boolean.automate_vacuum_tuesday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: W
+            show_icon: false
+            entity: input_boolean.automate_vacuum_wednesday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: T
+            show_icon: false
+            entity: input_boolean.automate_vacuum_thursday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: F
+            show_icon: false
+            entity: input_boolean.automate_vacuum_friday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: S
+            show_icon: false
+            entity: input_boolean.automate_vacuum_saturday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: S
+            show_icon: false
+            entity: input_boolean.automate_vacuum_sunday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+            margin: 10px;
+            box-shadow:
+              {% if is_state('sun.sun', 'above_horizon') %}
+                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+              {% elif is_state('sun.sun', 'below_horizon') %}
+                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+              {% endif %}
+          }
+        entities:
+          - input_datetime.alarm_pieter
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Gradually turn on light
+            show_icon: false
+            entity: input_boolean.alarm_lights
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: Turn on radio
+            show_icon: false
+            entity: input_boolean.alarm_radio
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: M
+            show_icon: false
+            entity: input_boolean.alarm_monday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: T
+            show_icon: false
+            entity: input_boolean.alarm_tuesday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: W
+            show_icon: false
+            entity: input_boolean.alarm_wednesday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: T
+            show_icon: false
+            entity: input_boolean.alarm_thursday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: F
+            show_icon: false
+            entity: input_boolean.alarm_friday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: S
+            show_icon: false
+            entity: input_boolean.alarm_saturday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+          - type: custom:button-card
+            name: S
+            show_icon: false
+            entity: input_boolean.alarm_sunday
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - value: "off"
+                color: var(--medium-grey-color)
+                styles:
+                  name:
+                    - color: var(--disabled-text-color)
+                  icon:
+                    - color: var(--disabled-text-color)
+      - break
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.guest_mode
+            icon: mdi:shield-account

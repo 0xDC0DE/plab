@@ -1,7 +1,0 @@
-lovelace-cast:
-  mode: yaml
-  filename: lovelace-cast.yaml
-  title: Casting Dashboard
-  icon: mdi:cast
-  show_in_sidebar: false
-  require_admin: false

@@ -1,0 +1,279 @@
+title: Climate
+icon: mdi:thermometer
+path: climate
+panel: true
+cards:
+  # Better layout control
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+      - type: custom:weather-card
+        entity: weather.openweathermap
+        style: |
+          ha-card {
+            margin: 10px;
+            box-shadow:
+              {% if is_state('sun.sun', 'above_horizon') %}
+                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+              {% elif is_state('sun.sun', 'below_horizon') %}
+                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+              {% endif %}
+          }
+        #- type: iframe
+        #  url: https://gadgets.buienradar.nl/gadget/zoommap/?lat=51.15432&lng=3.23128&overname=2&zoom=8&naam=Oostkamp&size=3&voor=1
+        #  aspect_ratio: 113%
+      - break
+      - type: custom:swipe-card
+        parameters:
+          scrollbar:
+            hide: false
+            draggable: true
+            snapOnRelease: true
+        cards:
+          - type: custom:mini-graph-card
+            name: TEMPERATURE OUTSIDE
+            style: |
+              ha-card {
+                margin: 10px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                  {% endif %}
+              }
+            entities:
+              - entity: sensor.dark_sky_temperature
+              - entity: sensor.solar_elevation
+                color: "#404040"
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            lower_bound_secondary: 0
+            color_thresholds:
+              - value: -10
+                color: "#0080ff"
+              - value: 10
+                color: "#00FF2E"
+              - value: 20
+                color: "#FF8000"
+              - value: 30
+                color: "#ff0000"
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+          - type: custom:mini-graph-card
+            name: HUMIDITY OUTSIDE
+            style: |
+              ha-card {
+                margin: 10px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                  {% endif %}
+              }
+            icon: mdi:water-percent
+            entities:
+              - entity: sensor.dark_sky_humidity
+              - entity: sensor.solar_elevation
+                color: "#404040"
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            lower_bound_secondary: 0
+            color_thresholds:
+              - value: 0
+                color: "#0080ff"
+              - value: 25
+                color: "#00FF2E"
+              - value: 50
+                color: "#ff8000"
+              - value: 75
+                color: "#ff0000"
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+          - type: custom:mini-graph-card
+            name: WIND SPEED
+            style: |
+              ha-card {
+                margin: 10px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                  {% endif %}
+              }
+            color_thresholds:
+              - value: 1
+                color: "#00FF2E"
+              - value: 12
+                color: "#0080ff"
+              - value: 30
+                color: "#7f00ff"
+              - value: 60
+                color: "#ff0000"
+            entities:
+              - entity: sensor.dark_sky_wind_speed
+              - entity: sensor.solar_elevation
+                color: "#404040"
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            lower_bound_secondary: 0
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+          - type: custom:mini-graph-card
+            name: AIR QUALITY INDEX
+            style: |
+              ha-card {
+                margin: 10px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                  {% endif %}
+              }
+            color_thresholds:
+              - value: 0
+                color: "#00FF2E"
+              - value: 50
+                color: "#0080ff"
+              - value: 100
+                color: "#7f00ff"
+              - value: 200
+                color: "#ff0000"
+            entities:
+              - entity: sensor.u_s_air_quality_index
+              - entity: sensor.solar_elevation
+                color: "#404040" 
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            lower_bound_secondary: 0
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+      - type: custom:swipe-card
+        parameters:
+          scrollbar:
+            hide: false
+            draggable: true
+            snapOnRelease: true
+        cards:
+          - type: custom:mini-graph-card
+            name: TEMPERATURE INSIDE
+            style: |
+              ha-card {
+                margin: 10px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                  {% endif %}
+              }
+            entities:
+              - entity: sensor.bedroom_climate_sensor
+                name: Bedroom
+              - entity: sensor.living_room_climate_sensor
+                name: Living Room
+              - entity: sensor.office_climate_sensor
+                name: Office
+              - entity: sensor.solar_elevation
+                color: "#404040" 
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            lower_bound_secondary: 0
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+          - type: custom:mini-graph-card
+            name: HUMIDITY INSIDE
+            style: |
+              ha-card {
+                margin: 10px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+                  {% endif %}
+              }
+            entities:
+              - entity: sensor.bedroom_climate_sensor_2
+                name: Bedroom
+              - entity: sensor.living_room_climate_sensor_2
+                name: Living Room
+              - entity: sensor.office_climate_sensor_2
+                name: Office
+              - entity: sensor.solar_elevation
+                color: "#404040"
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            lower_bound_secondary: 0
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+              labels: true
