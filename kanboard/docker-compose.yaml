@@ -13,8 +13,8 @@ services:
     networks:
       - traefik2_proxy
     volumes:
-      - /home/p/kanboard/data:/var/www/app/data
-      - /home/p/kanboard/plugins:/var/www/app/plugins
+      - $USERDIR/kanboard/data:/var/www/app/data
+      - $USERDIR/kanboard/plugins:/var/www/app/plugins
     labels:
       - "traefik.enable=true"
       ## HTTP Routers
