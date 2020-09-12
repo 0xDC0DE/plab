@@ -21,18 +21,18 @@
         value_template: '{{ states.input_select.suki_presence_status.state }}'
         friendly_name: 'Suki'
 # Dark sky weather entity into sensors
-      dark_sky_temperature:
-        friendly_name: "Outside Temperature"
-        unit_of_measurement: '°C'
-        value_template: "{{ state_attr('weather.dark_sky', 'temperature') }}"
-      dark_sky_humidity:
-        friendly_name: "Outside Humidity"
-        unit_of_measurement: '%'
-        value_template: "{{ state_attr('weather.dark_sky', 'humidity') }}"
-      dark_sky_wind_speed:
-        friendly_name: "Wind Speed"
-        unit_of_measurement: 'km/h'
-        value_template: "{{ state_attr('weather.dark_sky', 'wind_speed') }}"
+#     dark_sky_temperature:
+#       friendly_name: "Outside Temperature"
+#       unit_of_measurement: '°C'
+#       value_template: "{{ state_attr('weather.dark_sky', 'temperature') }}"
+#     dark_sky_humidity:
+#       friendly_name: "Outside Humidity"
+#       unit_of_measurement: '%'
+#       value_template: "{{ state_attr('weather.dark_sky', 'humidity') }}"
+#     dark_sky_wind_speed:
+#       friendly_name: "Wind Speed"
+#       unit_of_measurement: 'km/h'
+#       value_template: "{{ state_attr('weather.dark_sky', 'wind_speed') }}"
 # Input datetime as a sensor
       front_door_last_opened:
         friendly_name: "Front door last opened at"
@@ -113,13 +113,3 @@
   - platform: illuminance
     name: Illuminance
     entity_id: weather.dark_sky
-# OpenWeatherMap as sensor
- #- platform: openweathermap
- #  api_key: !secret openweathermap_api_key
- #  monitored_conditions:
- #    - weather
- #    - temperature
- #    - wind_speed
- #    - humidity
- #    - clouds
- #    - weather_code
