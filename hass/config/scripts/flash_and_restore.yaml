@@ -1,0 +1,92 @@
+save_before_flash:
+  sequence:
+    - service: scene.create
+      data:
+        scene_id: flash_restore_state
+        snapshot_entities:
+          - light.led_strip_2
+          - light.led_strip
+    - delay:
+        seconds: 1
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.led_strip_2
+          - light.led_strip
+    - delay:
+        seconds: 1
+    - service: scene.create
+      data:
+        scene_id: flash_restore_color
+        snapshot_entities:
+          - light.led_strip_2
+          - light.led_strip
+    - delay:
+        seconds: 1
+flash_blue:
+  sequence:
+    - service: light.turn_on
+      data_template:
+        entity_id:
+        - light.led_strip_2
+        - light.led_strip
+        rgb_color: [0,0,255]
+        transition: 0
+flash_red:
+  sequence:
+    - service: light.turn_on
+      data_template:
+        entity_id:
+        - light.led_strip_2
+        - light.led_strip
+        rgb_color: [255,0,0]
+        transition: 0
+restore_during_flash:
+  sequence:
+    - delay:
+        seconds: 3
+    - service: scene.turn_on
+      data:
+        entity_id: scene.flash_restore_state
+    - delay:
+        seconds: 3
+restore_after_flash:
+  sequence:
+    - delay:
+        seconds: 3
+    - service: scene.turn_on
+      data:
+        entity_id: scene.flash_restore_color
+    - delay:
+        seconds: 3
+    - service: scene.turn_on
+      data:
+        entity_id: scene.flash_restore_state
+    - delay:
+        seconds: 3
+flash_blue_three_times_and_restore:
+  sequence:
+    - service: script.save_before_flash
+    - repeat:
+        count: 3
+        sequence:
+          - service: script.flash_blue
+          - service: script.restore_during_flash
+    - service: script.restore_after_flash
+doorbell_flash_and_restore:
+  sequence:
+    - service: script.save_before_flash
+    - repeat:
+        while:
+          - condition: template
+            value_template: "{{ is_state('binary_sensor.front_door_sensor', 'off')}}"
+          - condition: template
+            value_template: "{{ repeat.index <= 20 }}"
+        sequence:
+          - service: script.flash_blue
+          - delay:
+              seconds: 1
+          - service: script.flash_red
+          - delay:
+              seconds: 1
+    - service: script.restore_after_flash

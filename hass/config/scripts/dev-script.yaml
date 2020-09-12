@@ -1,0 +1,13 @@
+dev_script_with_field:
+  sequence:
+    - service: notify.mobile_app_pieter
+      data_template:
+        title: "{{ title }}"
+        message: "{{ message }}"
+execute_dev_script:
+  sequence:
+    - service: script.dev_script_with_field
+      data:
+        title: "Field test"
+        message: "[0,200,0]"
+

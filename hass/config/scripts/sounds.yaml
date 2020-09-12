@@ -1,0 +1,17 @@
+play_doorbell:
+  sequence:
+    - service: script.play_sound_all
+      data:
+        media: "https://www.soundjay.com/door/doorbell-1.mp3"
+play_sound_all:
+  sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id:
+         - media_player.office_speaker
+         - media_player.bedroom_speaker
+         - media_player.living_room_stereo
+         - media_player.kitchen_display
+        media_content_id: "{{ media }}"
+        media_content_type: music
+

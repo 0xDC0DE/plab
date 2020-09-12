@@ -1,0 +1,73 @@
+scene_activity:
+  sequence:
+    service: homeassistant.turn_on
+    data:
+      entity_id: group.downstairs_lights
+scene_dark_downstairs:
+  sequence:
+    service: homeassistant.turn_off
+    data:
+      entity_id: group.downstairs_lights
+scene_movie:
+  sequence:
+    - service: homeassistant.turn_off
+      data:
+        entity_id:
+          - switch.corner_lamp
+          - switch.tower_lamp
+          - switch.ivar_lamp
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - switch.bar_lamp
+          - light.led_strip_2
+scene_away:
+  sequence:
+    - service: homeassistant.turn_off
+      data:
+        entity_id:
+          - group.bedroom_lights
+          - group.downstairs_lights
+          - group.office_devices
+scene_office_on:
+  sequence:
+    service: homeassistant.turn_on
+    data:
+      entity_id: group.office_devices
+scene_office_off:
+  sequence:
+    service: homeassistant.turn_off
+    data:
+      entity_id: group.office_devices
+scene_bedroom_cosy:
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedlight
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_ceiling_light
+        rgb_color: [255,127,0]
+        brightness: 135
+    - service: light.turn_on
+      data:
+        entity_id: light.reading_light
+        rgb_color: [255,63,0]
+        brightness: 145
+scene_bedroom_bright:
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedlight
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.bedroom_ceiling_light
+          - light.reading_light
+        rgb_color: [255,255,255]
+        brightness: 255
+scene_bedroom_dark:
+  sequence:
+    service: homeassistant.turn_off
+    data:
+      entity_id: group.bedroom_lights

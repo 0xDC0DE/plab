@@ -1,0 +1,22 @@
+conditional_notify_mobiles:
+  mode: single
+  alias: "notify mobiles if guest_mode not enabled"
+  sequence:
+    - condition: state
+      entity_id: 'input_boolean.guest_mode'
+      state: 'off'
+    - service: notify.mobiles
+      data_template:
+        message: "{{ message }}"
+        title: "{{title}}"
+        data:
+          tag: "{{tag}}"
+#test_notify:
+#  mode: single
+#  alias: "testing variables in the notify_mobiles script"
+#  sequence:
+#    - service: script.conditional_notify_mobiles
+#      data:
+#        title: "Test title"
+#        message: "test message"
+#        tag: "vacuum"

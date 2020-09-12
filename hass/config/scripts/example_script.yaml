@@ -1,0 +1,7 @@
+example_script:
+  mode: single
+  alias: "example script"
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling
