@@ -33,6 +33,19 @@
 #       friendly_name: "Wind Speed"
 #       unit_of_measurement: 'km/h'
 #       value_template: "{{ state_attr('weather.dark_sky', 'wind_speed') }}"
+# OpenWeatherMap entity into sensors
+      owm_temperature:
+        friendly_name: "Outside Temperature"
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('weather.openweathermap', 'temperature') }}"
+      owm_humidity:
+        friendly_name: "Outside Humidity"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('weather.openweathermap', 'humidity') }}"
+      owm_wind_speed:
+        friendly_name: "Wind Speed"
+        unit_of_measurement: 'km/h'
+        value_template: "{{ state_attr('weather.openweathermap', 'wind_speed') }}"
 # Input datetime as a sensor
       front_door_last_opened:
         friendly_name: "Front door last opened at"

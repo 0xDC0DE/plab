@@ -43,7 +43,7 @@ cards:
                   {% endif %}
               }
             entities:
-              - entity: sensor.dark_sky_temperature
+              - entity: sensor.owm_temperature
               - entity: sensor.solar_elevation
                 color: "#404040"
                 name: Solar Elevation
@@ -85,7 +85,7 @@ cards:
               }
             icon: mdi:water-percent
             entities:
-              - entity: sensor.dark_sky_humidity
+              - entity: sensor.owm_humdity
               - entity: sensor.solar_elevation
                 color: "#404040"
                 name: Solar Elevation
@@ -135,7 +135,7 @@ cards:
               - value: 60
                 color: "#ff0000"
             entities:
-              - entity: sensor.dark_sky_wind_speed
+              - entity: sensor.owm_wind_speed
               - entity: sensor.solar_elevation
                 color: "#404040"
                 name: Solar Elevation

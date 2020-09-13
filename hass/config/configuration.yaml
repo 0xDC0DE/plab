@@ -40,7 +40,6 @@ config:
 lovelace:
   mode: yaml
   resources: !include lovelace/resources.yaml
-  dashboards: !include lovelace/dashboards.yaml
 
 # Checks for available updates
 # Note: This component will send some information about your system to

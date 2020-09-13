@@ -1,24 +1,9 @@
-- id: alarm_beta
-  alias: "Beta version of alarm for debugging purpose"
-  trigger:
-    - platform: template
-      value_template: >
-        {% set current_time = (now().strftime('%s')|int-(10*60))|timestamp_custom('%H:%M',false) %}
-        {% set a_time = state_attr('input_datetime.alarm_pieter','timestamp')|int|timestamp_custom('%H:%M',false) %}
-        {{ current_time == a_time }}
-  action:
-    service: notify.mobile_app_pieter
-    data:
-      message: "Alarm triggered"
-      title: "Beta Alarm"
-      data:
-        tag: "beta_alarm"
 - id: alarm
   alias: "Alarm"
   description: "Activate lights and radio starting 10 minutes before alarm time"
   trigger:
     - platform: template
-      value_template: "{{(now().strftime('%s')|int+(10*60))|timestamp_custom('%H:%M',false)==(state_attr('input_datetime.alarm_pieter','timestamp')|int|timestamp_custom('%H:%M',false))}}"
+      value_template: "{% set stamp = state_attr('input_datetime.alarm_pieter', 'timestamp') | int %}{% set triggertime = (stamp - 600) | timestamp_custom('%H:%M', False)%}{% if triggertime == states('sensor.time') %}true{%endif%}"
   action:
     - choose:
       - conditions:

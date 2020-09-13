@@ -5,7 +5,7 @@ wake_up_sequence:
         minutes: 10
     - service: script.start_radio_bedroom
     - service: script.turn_on_bedroom_lights
-turn_ond_bedroom_lights:
+turn_on_bedroom_lights:
   sequence:
     - condition: template
       value_template: "{{ states('input_boolean.alarm_lights') == 'on'}}"
