@@ -54,3 +54,5 @@ guest_mode:
 
 doorbell_lights_in_progress:
   initial: off
+baby_monitor:
+  initial: off

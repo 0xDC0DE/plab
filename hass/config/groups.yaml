@@ -47,3 +47,10 @@ office_devices:
     - switch.second_desk
     - light.led_strip
     - light.red_lamp
+office_lights:
+  name: Office Lights
+  entities:
+    - switch.star_light
+    - light.led_strip
+    - light.red_lamp
+

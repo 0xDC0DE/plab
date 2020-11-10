@@ -5,6 +5,9 @@
       - 'date'
       - 'date_time'
       - 'time_date'
+# Current HA version
+  - platform: version
+    name: current_version
 # Make sensors out of input selects for presence status
   - platform: template
     sensors:
@@ -125,4 +128,4 @@
 # illuminance sensor based on sun height and weather conditions
   - platform: illuminance
     name: Illuminance
-    entity_id: weather.dark_sky
+    entity_id: weather.openweathermap

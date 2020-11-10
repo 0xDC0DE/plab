@@ -52,6 +52,19 @@
         sequence:
           service: vacuum.start
           entity_id: vacuum.xiaomi_vacuum_cleaner
+- id: vacuum_weekends
+  alias: "Vacuum weekends"
+  description: "Automate vacuum on weekends"
+  trigger:
+    - platform: template
+      value_template: "{{ states('sensor.time') == (state_attr('input_datetime.vacuum_time_weekend', 'timestamp') | int | timestamp_custom('%H:%M', False)) }}"
+  action:
+    # Do not trigger if already started manually today
+    - condition: state
+      entity_id: 'input_boolean.vacuumed_today'
+      state: 'off'
+    # Check if vacuuming is enabled for this day of the week
+    - choose:
       - conditions:
         - condition: template
           value_template: "{{ now().strftime('%A') == 'Saturday' }}"

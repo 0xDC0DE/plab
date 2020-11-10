@@ -6,11 +6,13 @@ List of services in alphabetical order:
 - glances: system monitoring tool
 - heimdall: dashboard
 - home assistant: open source home automation tool
-- hugo: static website generator
+- hugo: static website generator (publicly available at [blog.plab.be](https://blog.plab.be-))
 - kanboard: a kanban board
 - nodered: graphical programming for home automation
-- openeats: recipe manager
+- openeats: recipe manager (publicly available at [eat.plab.be](https://eat.plab.be))
 - portainer: graphical user interface to manage docker containers
 - psitransfer: website for temporary file sharing
 - traefik: reverse proxy
 - vsftpd: ftp server
+
+Screenshots

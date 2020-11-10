@@ -169,33 +169,86 @@ cards:
                         font-family: Helvetica;
                         letter-spacing: '-0.01em';
                       }
-      - break
-      - type: picture-entity
-        entity: camera.patio
-        camera_view: live
-        style: |
-          ha-card {
-            margin: 10px;
-            box-shadow:
-              {% if is_state('sun.sun', 'above_horizon') %}
-                -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
-              {% elif is_state('sun.sun', 'below_horizon') %}
-                -8px -8px 8px 0 rgba(50, 50, 50,.9),8px 8px 8px 0 rgba(0,0,0,.1);
-              {% endif %}
-          }
-      - type: picture-entity
-        entity: camera.nursery
-        camera_view: live
-        style: |
-          ha-card {
-            margin: 10px;
-            box-shadow:
-              {% if is_state('sun.sun', 'above_horizon') %}
-                -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
-              {% elif is_state('sun.sun', 'below_horizon') %}
-                -8px -8px 8px 0 rgba(50, 50, 50,.9),8px 8px 8px 0 rgba(0,0,0,.1);
-              {% endif %}
-          }
+      - type: horizontal-stack
+        cards:
+            # Icon to display - First button
+          - type: 'custom:button-card'
+            icon: mdi:bed-outline
+            entity: input_boolean.guest_mode
+            color_type: card
+            color: var(--primary-color)
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)'
+                value: 'on'
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('input_boolean.guest_mode', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('input_boolean.guest_mode', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('input_boolean.guest_mode', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('input_boolean.guest_mode', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+          - type: vertical-stack
+            cards:
+                # Big text to display - First button
+              - type: markdown
+                content: |
+                  # Baby monitor
+                style:
+                  .: |
+                    ha-card {
+                      --ha-card-background: none !important;
+                      box-shadow: none !important;
+                      height: 20px;
+                      margin-top: 15px;
+                    }
+                  ha-markdown:
+                    $: |
+                      h1 {
+                        font-size: 20px;
+                        font-weight: bold;
+                        font-family: Helvetica;
+                        letter-spacing: '-0.01em';
+                      }
+              - type: markdown
+                content: >
+                  {% if is_state('input_boolean.guest_mode', 'on') %}
+                    # Sound and motion detection turned on
+                  {% else %}
+                    # Sound and motion detection turned off
+                  {% endif %}
+                style:
+                  .: |
+                    ha-card {
+                      --ha-card-background: none !important;
+                      box-shadow: none !important;
+                    }
+                  ha-markdown:
+                    $: |
+                      h1 {
+                        font-size: 15px;
+                        font-weight: thin;
+                        font-family: Helvetica;
+                        letter-spacing: '-0.01em';
+                      }
       - type: horizontal-stack
         cards:
             # Icon to display - First button
@@ -276,3 +329,30 @@ cards:
                         font-family: Helvetica;
                         letter-spacing: '-0.01em';
                       }
+      - break
+      - type: picture-entity
+        entity: camera.patio
+        camera_view: live
+        style: |
+          ha-card {
+            margin: 10px;
+            box-shadow:
+              {% if is_state('sun.sun', 'above_horizon') %}
+                -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+              {% elif is_state('sun.sun', 'below_horizon') %}
+                -8px -8px 8px 0 rgba(50, 50, 50,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+              {% endif %}
+          }
+      - type: picture-entity
+        entity: camera.nursery
+        camera_view: live
+        style: |
+          ha-card {
+            margin: 10px;
+            box-shadow:
+              {% if is_state('sun.sun', 'above_horizon') %}
+                -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+              {% elif is_state('sun.sun', 'below_horizon') %}
+                -8px -8px 8px 0 rgba(50, 50, 50,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+              {% endif %}
+          }
