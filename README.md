@@ -15,4 +15,14 @@ List of services in alphabetical order:
 - traefik: reverse proxy
 - vsftpd: ftp server
 
-Screenshots
+# More services
+- Authentication through traefik uses Google OAuth
+
+# TODO:
+- SpeedTest
+- PiHole
+- InfluxDB
+- Grafana
+
+# Screenshots
+TODO
