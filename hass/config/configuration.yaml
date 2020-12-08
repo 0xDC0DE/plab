@@ -22,6 +22,8 @@ http:
   # ssl_certificate: /config/certs/fullchain.pem
   # ssl_key: /config/certs/privkey.pem
 
+# To wake on lan of computer
+
 ####################
 # UI
 ####################
@@ -55,6 +57,9 @@ discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
+
+# allows to create my own popups (and more)
+browser_mod:
 
 ####################
 # INCLUDES
@@ -150,9 +155,6 @@ light:
   - platform: switch
     name: Tower Lamp
     entity_id: switch.tower_lamp
-  - platform: switch
-    name: Garden Lights
-    entity_id: switch.garden_lights
   - platform: switch
     name: Bar Lamp
     entity_id: switch.bar_lamp

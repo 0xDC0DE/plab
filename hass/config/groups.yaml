@@ -11,6 +11,7 @@ living_room_lights:
     - light.corner_lamp
     - light.tower_lamp
     - light.led_strip_2
+    - switch.christmas_tree
 downstairs_lights:
   name: Downstairs Lights
   entities:
@@ -19,6 +20,7 @@ downstairs_lights:
     - light.tower_lamp
     - light.led_strip_2
     - light.ivar_lamp
+    - switch.christmas_tree
 people:
   name: People
   entities:

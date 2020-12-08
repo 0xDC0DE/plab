@@ -6,6 +6,7 @@
     switch.garden_lights: true
     switch.ivar_lamp: true
     light.led_strip_2: true
+    switch.christmas_tree: true
 - name: Movie
   entities:
     switch.bar_lamp: true
@@ -14,18 +15,14 @@
     switch.garden_lights: true
     light.led_strip_2: true
     switch.ivar_lamp: false
+    switch.christmas_tree: true
 - name: Dark downstairs
   entities:
-    switch.bar_lamp: false
-    switch.corner_lamp: false
-    switch.tower_lamp: false
-    switch.garden_lights: false
-    light.led_strip_2: false
-    switch.ivar_lamp: false
+    group.downstairs_lights: false
 - name: Away
   entities:
     light.all: false
-    # leds off
+    switch.christmas_tree: false
 - name: Office on
   entities:
     switch.desk: true
