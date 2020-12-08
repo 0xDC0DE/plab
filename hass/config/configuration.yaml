@@ -23,6 +23,7 @@ http:
   # ssl_key: /config/certs/privkey.pem
 
 # To wake on lan of computer
+wake_on_lan:
 
 ####################
 # UI
