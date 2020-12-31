@@ -22,8 +22,9 @@ http:
   # ssl_certificate: /config/certs/fullchain.pem
   # ssl_key: /config/certs/privkey.pem
 
-# To wake on lan of computer
-wake_on_lan:
+####################
+# WAKE ON LAN
+####################
 
 ####################
 # UI
@@ -241,6 +242,13 @@ google_assistant:
         - Temperature Upstairs
       room: Bedroom
       expose: true
+    light.lidl_led_1:
+      expose: true
+      name: Clouds
+      aliases:
+        - Cloud lamps
+        - Cloud led
+        - Cloud led strip
     #Exclude these switches, they are exposed as Lights instead
     switch.bar_lamp:
       expose: false

@@ -126,6 +126,7 @@
 #    api_key: !secret av_api_key
 #    show_on_map: false
 # illuminance sensor based on sun height and weather conditions
+# Does not officially support openweathermap data
   - platform: illuminance
     name: Illuminance
     entity_id: weather.openweathermap
