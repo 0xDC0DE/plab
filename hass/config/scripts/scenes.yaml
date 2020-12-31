@@ -47,8 +47,14 @@ scene_bedroom_cosy:
     - service: light.turn_on
       data:
         entity_id: light.bedroom_ceiling_light
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_ceiling_light
         rgb_color: [255,127,0]
         brightness: 135
+    - service: light.turn_on
+      data:
+        entity_id: light.reading_light
     - service: light.turn_on
       data:
         entity_id: light.reading_light
