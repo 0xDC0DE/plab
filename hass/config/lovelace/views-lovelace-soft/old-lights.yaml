@@ -1,0 +1,1066 @@
+title: Lights
+icon: mdi:lightbulb-multiple
+path: lights
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: vertical-stack
+        cards:
+         - type: markdown
+           content: |
+             # Downstairs
+           style: |
+             ha-card {
+               height: 20px;
+               --card-background-color: 'rgba(11, 11, 11, 0.00)';
+               box-shadow: 2px 2px rgba(0,0,0,0.0);
+               margin-bottom: 15px;
+             }
+             h1 {
+               font-size: 20px;
+               font-weight: bold;
+               font-family: Helvetica;
+               letter-spacing: '-0.01em';
+             }
+      - type: horizontal-stack
+        cards:
+          - entity: light.bar_lamp
+            icon: 'mdi:lamp'
+            show_icon: true
+            show_name: false
+            triggers_update:
+              - sun.sun
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - margin: 5px
+                - border-radius: 15px
+                - border-width: 1px
+                - border-style: solid
+                - border-color: var(--primary-background-color)
+                - box-shadow: |
+                    [[[ return states['sun.sun'].state == 'below_horizon'
+                      ? '-5px -5px 8px rgba(50, 50, 50,.5),5px 5px 8px rgba(0,0,0,.2)'
+                      : '-4px -4px 8px rgba(255,255,255,.9),5px 5px 8px rgba(0,0,0,.1)';
+                    ]]]
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            state:
+              - value: 'on'
+                styles:
+                  card:
+                    - border-width: 2px
+                    - box-shadow: |
+                        [[[ return states['sun.sun'].state == 'below_horizon'
+                          ? 'inset -4px -4px 5px rgba(60, 60, 60,.6), inset 4px 4px 5px rgba(0,0,0,.1)'
+                          : 'inset -3px -3px 5px rgba(255,255,255), inset 3px 3px 5px rgba(0,0,0,.2)';
+                        ]]]
+                    - border-color: var(--paper-item-icon-active-color)
+                  icon:
+                    - color: var(--paper-item-icon-active-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: light.corner_lamp
+            icon: 'mdi:floor-lamp'
+            show_icon: true
+            show_name: false
+            triggers_update:
+              - sun.sun
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - margin: 5px
+                - border-radius: 15px
+                - border-width: 1px
+                - border-style: solid
+                - border-color: var(--primary-background-color)
+                - box-shadow: |
+                    [[[ return states['sun.sun'].state == 'below_horizon'
+                      ? '-5px -5px 8px rgba(50, 50, 50,.5),5px 5px 8px rgba(0,0,0,.2)'
+                      : '-4px -4px 8px rgba(255,255,255,.9),5px 5px 8px rgba(0,0,0,.1)';
+                    ]]]
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            state:
+              - value: 'on'
+                styles:
+                  card:
+                    - border-width: 2px
+                    - box-shadow: |
+                        [[[ return states['sun.sun'].state == 'below_horizon'
+                          ? 'inset -4px -4px 5px rgba(60, 60, 60,.6), inset 4px 4px 5px rgba(0,0,0,.1)'
+                          : 'inset -3px -3px 5px rgba(255,255,255), inset 3px 3px 5px rgba(0,0,0,.2)';
+                        ]]]
+                    - border-color: var(--paper-item-icon-active-color)
+                  icon:
+                    - color: var(--paper-item-icon-active-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: light.tower_lamp
+            icon: 'mdi:table-column'
+            show_icon: true
+            show_name: false
+            triggers_update:
+              - sun.sun
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - margin: 5px
+                - border-radius: 15px
+                - border-width: 1px
+                - border-style: solid
+                - border-color: var(--primary-background-color)
+                - box-shadow: |
+                    [[[ return states['sun.sun'].state == 'below_horizon'
+                      ? '-5px -5px 8px rgba(50, 50, 50,.5),5px 5px 8px rgba(0,0,0,.2)'
+                      : '-4px -4px 8px rgba(255,255,255,.9),5px 5px 8px rgba(0,0,0,.1)';
+                    ]]]
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            state:
+              - value: 'on'
+                styles:
+                  card:
+                    - border-width: 2px
+                    - box-shadow: |
+                        [[[ return states['sun.sun'].state == 'below_horizon'
+                          ? 'inset -4px -4px 5px rgba(60, 60, 60,.6), inset 4px 4px 5px rgba(0,0,0,.1)'
+                          : 'inset -3px -3px 5px rgba(255,255,255), inset 3px 3px 5px rgba(0,0,0,.2)';
+                        ]]]
+  #                 - border-color: var(--paper-item-icon-active-color)
+                  icon:
+                    - color: var(--paper-item-icon-active-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+
+            # Example entry
+            # Change this to the entity you want to control
+          - entity: light.bar_lamp
+            # Change this to the icon you want to display
+            icon: 'mdi:ceiling-light'
+            # Change this to the name you want to display
+            name: Bedroom
+            # You can adjust the size of the icon
+            size: 35%
+            styles:
+              img_cell:
+            # You can adjust padding of the icon
+                - padding-left: 15px
+                - justify-content: start
+              card:
+                - margin: 10px
+                - width: 100px
+                - height: 100px
+                - border-radius: 15px
+                - box-shadow: |
+                    [[[ return states['sun.sun'].state == 'below_horizon'
+                      ? '-5px -5px 8px rgba(50, 50, 50,.5),5px 5px 8px rgba(0,0,0,.2)'
+                      : '-4px -4px 8px rgba(255,255,255,.9),5px 5px 8px rgba(0,0,0,.1)';
+                    ]]]
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+              grid:
+                - grid-template-areas: '"i" "n" "s"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
+              name:
+                - justify-self: start
+                - font-weight: bold
+                - font-size: 15px
+                - padding-left: 15px
+              state:
+                - justify-self: start
+                - font-weight: bold
+                - font-size: 15px
+                - opacity: 0.6
+                - padding: 0 15px 5px
+            show_state: true
+            state:
+              - value: 'on'
+                styles:
+                  card:
+                    - box-shadow: |
+                        [[[ return states['sun.sun'].state == 'below_horizon'
+                          ? 'inset -4px -4px 5px rgba(60, 60, 60,.6), inset 4px 4px 5px rgba(0,0,0,.1)'
+                          : 'inset -3px -3px 5px rgba(255,255,255), inset 3px 3px 5px rgba(0,0,0,.2)';
+                        ]]]
+                  icon:
+                    - color: var(--paper-item-icon-active-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+
+          - entity: light.led_strip_2
+            icon: 'mdi:led-strip-variant'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('light.led_strip_2', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('light.led_strip_2', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.led_strip_2', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.led_strip_2', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: light.ivar_lamp
+            icon: 'mdi:desk-lamp'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('light.ivar_lamp', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('light.ivar_lamp', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.ivar_lamp', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.ivar_lamp', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+      - type: markdown
+        content: |
+          ###        Scenes
+        style: |
+          ha-card {
+            height: 20px;
+            --card-background-color: 'rgba(11, 11, 11, 0.00)';
+            box-shadow: 2px 2px rgba(0,0,0,0.0);
+            margin-bottom: 10px;
+            margin-left: 25px;
+            margin-top: -20px;
+          }
+          h1 {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: Helvetica;
+            letter-spacing: '-0.01em';
+          }
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            icon: mdi:movie-open
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                margin-left: 35px;
+                margin-top: 5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.2);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.movie
+              haptic: medium
+          - type: 'custom:button-card'
+            icon: mdi:lightbulb-on
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                margin-top: 5px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.2);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.activity
+              haptic: medium
+          - type: 'custom:button-card'
+            icon: mdi:lightbulb-off
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                margin-top: 5px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.2);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.dark_downstairs
+              haptic: medium
+      - type: markdown
+        content: |
+          # Bedroom
+        style: |
+          ha-card {
+            height: 20px;
+            --card-background-color: 'rgba(11, 11, 11, 0.00)';
+            box-shadow: 2px 2px rgba(0,0,0,0.0);
+            margin-bottom: 15px;
+          }
+          h1 {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: Helvetica;
+            letter-spacing: '-0.01em';
+          }
+      - type: horizontal-stack
+        cards:
+          - entity: light.bedroom_ceiling_light
+            icon: 'mdi:ceiling-light'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('light.bedroom_ceiling_light', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('light.bedroom_ceiling_light', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.bedroom_ceiling_light', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.bedroom_ceiling_light', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: light.bedlight
+            icon: 'mdi:lamp'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('light.bedlight', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('light.bedlight', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.bedlight', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.bedlight', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: light.reading_light
+            icon: 'mdi:desk-lamp'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('light.reading_light', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('light.reading_light', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.reading_light', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.reading_light', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+      - type: markdown
+        content: |
+          ###        Scenes
+        style: |
+          ha-card {
+            height: 20px;
+            margin-bottom: 10px;
+            margin-top: -20px;
+            --card-background-color: 'rgba(11, 11, 11, 0.00)';
+            box-shadow: 2px 2px rgba(0,0,0,0.0);
+            margin-bottom: 15px;
+            margin-left: 25px;
+          }
+          h1 {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: Helvetica;
+            letter-spacing: '-0.01em';
+          }
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            icon: mdi:brightness-2
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                margin-top: 5px;
+                margin-left: 35px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.2);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.bedroom_cosy
+              haptic: medium
+          - type: 'custom:button-card'
+            icon: mdi:lightbulb-on
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                margin-top: 5px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.2);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.bedroom_bright
+              haptic: medium
+          - type: 'custom:button-card'
+            icon: mdi:lightbulb-off
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                margin-top: 5px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.2);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.bedroom_dark
+              haptic: medium
+  - type: vertical-stack
+    cards:
+      - type: vertical-stack
+        cards:
+         - type: markdown
+           content: |
+             # Attic
+           style: |
+             ha-card {
+               height: 20px;
+               --card-background-color: 'rgba(11, 11, 11, 0.00)';
+               box-shadow: 2px 2px rgba(0,0,0,0.0);
+               margin-bottom: 15px;
+             }
+             h1 {
+               font-size: 20px;
+               font-weight: bold;
+               font-family: Helvetica;
+               letter-spacing: '-0.01em';
+             }
+      - type: horizontal-stack
+        cards:
+          - entity: switch.desk
+            icon: 'mdi:monitor'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('switch.desk', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('switch.desk', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.desk', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.desk', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: switch.second_desk
+            icon: 'mdi:monitor'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('switch.second_desk', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('switch.second_desk', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.second_desk', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.second_desk', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: switch.star_light
+            icon: 'mdi:star'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('switch.star_light', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('switch.star_light', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.star_light', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('switch.star_light', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: light.led_strip
+            icon: 'mdi:led-strip-variant'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('light.led_strip', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('light.led_strip', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.led_strip', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.led_strip', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+          - entity: light.red_lamp
+            icon: 'mdi:desk-lamp'
+            show_icon: true
+            show_name: false
+            state:
+              - styles:
+                  icon:
+                    - color: 'var(--paper-item-icon-active-color)  '
+                value: 'on'
+            style: |
+              ha-card {
+                margin: 5px;
+                margin-left: 6.5px;
+                box-shadow:
+                 {% if is_state('sun.sun', 'above_horizon') and is_state('light.red_lamp', 'on') %}
+                   inset -4px -4px 8px 0 rgba(255,255,255,.9), inset 4px 4px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'above_horizon') and is_state('light.red_lamp', 'off') %}
+                   -5px -5px 8px 0 rgba(255,255,255,.9),5px 5px 8px 0 rgba(0,0,0,.1);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.red_lamp', 'on') %}
+                   inset -4px -4px 10px 0 rgba(50, 50, 50,.8), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+                 {% elif is_state('sun.sun', 'below_horizon') and is_state('light.red_lamp', 'off') %}
+                   -5px -5px 8px 0 rgba(50, 50, 50,.5),5px 5px 8px 0 rgba(0,0,0,.2);
+                 {% endif %}
+              }
+              @media only screen and (max-width: 600px) {
+                 ha-card {
+                   margin: 3px;
+                   margin-left: 4px;
+                 }
+              }
+              @media only screen and (min-width: 1200px) {
+                 ha-card {
+                   margin: 8px;
+                   margin-left: 11px;
+                 }
+              }
+            styles:
+              card:
+                - width: 60px
+                - height: 60px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: medium
+            type: 'custom:button-card'
+      - type: markdown
+        content: |
+          ###        Scenes
+        style: |
+          ha-card {
+            height: 20px;
+            --card-background-color: 'rgba(11, 11, 11, 0.00)';
+            box-shadow: 2px 2px rgba(0,0,0,0.0);
+            margin-bottom: 10px;
+            margin-left: 25px;
+            margin-top: -20px;
+          }
+          h1 {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: Helvetica;
+            letter-spacing: '-0.01em';
+          }
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            icon: mdi:lightbulb-on
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                margin-left: 35px;
+                margin-top: 5px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.2);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.office_on
+              haptic: medium
+          - type: 'custom:button-card'
+            icon: mdi:lightbulb-off
+            show_icon: true
+            show_name: false
+            style: |
+              ha-card {
+                margin: 10px;
+                margin-top: 5px;
+                box-shadow:
+                  {% if is_state('sun.sun', 'above_horizon') %}
+                    -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+                  {% elif is_state('sun.sun', 'below_horizon') %}
+                    -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.2);
+                  {% endif %}
+              }
+            styles:
+              card:
+                - width: 80px
+                - height: 80px
+                - border-radius: 15px
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.office_off
+              haptic: medium
+              # Example entry

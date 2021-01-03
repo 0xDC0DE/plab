@@ -1,0 +1,13 @@
+[frontends]
+  [frontends.homeassistant]
+    backend="homeassistant"
+    entryPoints = ["http", "https"]
+    passHostHeader = true
+    proirity = 20
+    [frontends.homeassistant.routes.docker_host]
+      rule="Host:hass.plab.be"
+ [backends]
+   [backends.homeassistant]
+     [backends.homeassistant.servers.host]
+       url = "http://172.17.0.1:8123"
+       weight = 10

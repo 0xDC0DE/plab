@@ -1,0 +1,161 @@
+title: Climate
+icon: mdi:thermometer
+path: climate
+panel: true
+cards:
+  # Better layout control
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+      - type: custom:weather-card
+        entity: weather.dark_sky
+        #- type: iframe
+        #  url: https://gadgets.buienradar.nl/gadget/zoommap/?lat=51.15432&lng=3.23128&overname=2&zoom=8&naam=Oostkamp&size=3&voor=1
+        #  aspect_ratio: 113%
+      - type: custom:air-visual-card
+        air_pollution_level: sensor.u_s_air_pollution_level
+        air_quality_index: sensor.u_s_air_quality_index
+        main_pollutant: sensor.u_s_main_pollutant
+        temp: weather.dark_sky
+        city: 'Brugge'
+      - break
+      - type: custom:swipe-card
+        parameters:
+          scrollbar:
+            hide: false
+            draggable: true
+            snapOnRelease: true
+        cards:
+          - type: custom:mini-graph-card
+            name: TEMPERATURE OUTSIDE
+            entities:
+              - entity: sensor.dark_sky_temperature
+              - entity: sensor.solar_elevation
+                color: gray
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+          - type: custom:mini-graph-card
+            name: HUMIDITY OUTSIDE
+            icon: mdi:water-percent
+            entities:
+              - entity: sensor.dark_sky_humidity
+              - entity: sensor.solar_elevation
+                color: gray
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+          - type: custom:mini-graph-card
+            name: WIND SPEED
+            color_thresholds:
+              - value: 1
+                color: "#00FF2E"
+              - value: 12
+                color: "#0080ff"
+              - value: 30
+                color: "#7f00ff"
+              - value: 60
+                color: "#ff0000"
+            entities:
+              - entity: sensor.dark_sky_wind_speed
+              - entity: sensor.solar_elevation
+                color: gray
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+      - type: custom:swipe-card
+        parameters:
+          scrollbar:
+            hide: false
+            draggable: true
+            snapOnRelease: true
+        cards:
+          - type: custom:mini-graph-card
+            name: TEMPERATURE INSIDE
+            entities:
+              - entity: sensor.bedroom_climate_sensor
+                name: Bedroom
+              - entity: sensor.living_room_climate_sensor
+                name: Living Room
+              - entity: sensor.office_climate_sensor
+                name: Office
+              - entity: sensor.solar_elevation
+                color: gray
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+          - type: custom:mini-graph-card
+            name: HUMIDITY INSIDE
+            entities:
+              - entity: sensor.bedroom_climate_sensor_2
+                name: Bedroom
+              - entity: sensor.living_room_climate_sensor_2
+                name: Living Room
+              - entity: sensor.office_climate_sensor_2
+                name: Office
+              - entity: sensor.solar_elevation
+                color: gray
+                name: Solar Elevation
+                show_line: true
+                line_width: 1
+                show_fill: false
+                show_points: false
+                show_legend: false
+                y_axis: secondary
+            hour24: true
+            hours_to_show: 72
+            line_width: 3
+            animate: true
+            show:
+              extrema: true
+              graph: line
+              points: false
+              labels: true

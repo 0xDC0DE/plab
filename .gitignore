@@ -5,6 +5,8 @@
 # no secrets
 *secrets.yaml
 *secrets.yml
+html5_push_registrations.conf
+traefik2/acme/*
 
 # no databases, logfiles or archives
 *.db
@@ -15,9 +17,16 @@
 *.tar.gz
 *.zip
 
+# data files
+*.mp3
+*.mp4
+*.jpg
+
 # no hass snapshots
 hass/config/www/snapshots/
 
 # nothing from these directories
 heimdall/*
-
+backups/*
+snap/*
+unifi/*
