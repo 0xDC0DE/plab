@@ -1,1 +1,22 @@
+# no environment variables or dotfiles
 *.env
+.*
+
+# no secrets
+*secrets.yaml
+*secrets.yml
+
+# no databases, logfiles or archives
+*.db
+*.db*
+*.sql
+*.log
+*.tar.gz
+*.zip
+
+# no hass snapshots
+hass/config/www/snapshots/
+
+# nothing from these directories
+heimdall/*
+

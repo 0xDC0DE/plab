@@ -22,8 +22,8 @@
         entity_id: group.bedroom_lights
         state: 'off'
       sequence:
-      - service: script.scene_bedroom_cosy
-  mode: single
+      - service: script.scene_bedroom_dim
+  mode: restart
 - id: bedroom_switch_long_press
   alias: Bedroom long press
   description: On long press, turn lights bright
@@ -35,7 +35,18 @@
     platform: event
   action:
   - service: script.scene_bedroom_bright
-  mode: single
+- id: bedroom_switch_double_press
+  alias: Bedroom double press
+  description: On double press go to night mode
+  trigger:
+  - event_data:
+      event: 1004
+      id: bedroom_switch
+    event_type: deconz_event
+    platform: event
+  action:
+  - service: script.scene_bedroom_nightlight
+  mode: restart
 # LIVING ROOM
 # ###########
 - id: living_room_siwtch_toggle
@@ -86,7 +97,7 @@
         state: 'off'
       sequence:
         - service: script.scene_office_on
-  mode: single
+  mode: restart
 # DOORBELL
 # ########
 - id: doorbell
