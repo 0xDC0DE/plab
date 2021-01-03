@@ -10,6 +10,7 @@
 *.db
 *.db*
 *.sql
+*.sqlite
 *.log
 *.tar.gz
 *.zip
