@@ -1,0 +1,26 @@
+version: '3.1'
+networks:
+  traefik2_proxy:
+    external:
+      name: traefik2_proxy
+services:
+  suzanne-nginx:
+    container_name: suzanne
+    restart: unless-stopped
+    image: nginx:alpine
+    volumes:
+      - /home/p/suzanne/site:/var/www/site
+      - /home/p/suzanne/conf:/etc/nginx/conf.d
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik2_proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.suzanne-rtr.entrypoints=https"
+      - "traefik.http.routers.suzanne-rtr.rule=Host(`suzanne.$DOMAINNAME`)"
+      - "traefik.http.routers.suzanne-rtr.tls=true"
+      ## HTTP Services
+      - "traefik.http.routers.suzanne-rtr.service=suzanne-svc"
+      - "traefik.http.services.suzanne-svc.loadbalancer.server.port=80"

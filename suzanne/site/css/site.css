@@ -1,0 +1,193 @@
+body, html {
+    height: 100%;
+}
+
+#header {
+    background: url(../img/w-header.png);
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    max-width: 100%;
+    background-color: #f8f5d9;
+
+    /* background fixed and background cover don't play nicely together on iOS. So background is fixed only on desktops.
+	/* XXS */ @media only screen and (min-width : 320px)  {}
+	/* XS  */ @media only screen and (min-width : 480px)  {}
+	/* SM  */ @media only screen and (min-width : 768px)  {}
+	/* MD  */ @media only screen and (min-width : 992px)  {background-attachment: fixed;}
+	/* LG  */ @media only screen and (min-width : 1200px) {}
+}
+
+body {
+    background-color: #f8f5d9;
+    color: #206847;
+    font-size: 1rem;
+    font-family: 'robotolight';
+}
+
+p.icon {
+    font-size: 4.5rem;
+    font-family: 'flamingosregular';
+    white-space: normal;
+}
+
+img.icon {
+    height: 10%;
+    width: auto;
+}
+
+a {
+    color: #fccc32;
+    text-decoration: underline;
+}
+
+p {
+    text-align: center;
+    white-space: pre-line;
+}
+
+p.left-align {
+    text-align: left;
+}
+
+h2 {
+    font-size: 3rem;
+    font-family: 'flamingosregular';
+}
+
+
+.ff-main {
+    font-weight: 1000;
+}
+
+.container {
+    padding-top: 20px;
+}
+
+.borderedcontainer {
+    padding-top: 20px;
+    border-style: none solid solid solid;
+    border-color: white;
+    border-width: 20px;
+}
+
+#arrow {
+    background-image: url(../img/arrow-down.png);
+    position: absolute;
+    top: 85%;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+
+    -webkit-animation: mover 2s infinite alternate;
+    animation: mover 2s infinite ease;
+}
+
+@-webkit-keyframes mover {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(15px); }
+    50%  { transform: translateY(0); }
+    100% { transform: translateY(0); }
+}
+@keyframes mover {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(15px); }
+    50%  { transform: translateY(0); }
+    100% { transform: translateY(0); }
+}
+
+.hover {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 60%;
+  }
+
+  .hover img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s;
+  }
+  .hover-content {
+    position: relative;
+    z-index: 99;
+  }
+  .hover-3 img {
+    width: 110%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hover-3-content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 99;
+  }
+
+  .hover-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    transition: all 0.4s;
+  }
+
+  .hover-3::after {
+    content: '';
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+    border: 3px solid #206847;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 90;
+    transition: all 0.3s;
+    transform: scale(1.1);
+    opacity: 0;
+    display: block;
+    opacity: 0;
+  }
+  
+  
+  .hover-3-description {
+    opacity: 0;
+    transform: scale(1.3);
+    transition: all 0.3s;
+    color: #206847;
+  }
+  
+  
+  .hover-3 .hover-overlay {
+    background: rgba(248, 245, 217, 0.1);
+  }
+  
+  .hover-3:hover img {
+    width: 100%;
+  }
+  
+  .hover-3:hover::after {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .hover-3:hover .hover-3-description {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .hover-3:hover .hover-overlay {
+    background: rgba(248, 245, 217, 0.8);
+  }
+

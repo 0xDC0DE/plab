@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'silverthreadjf-regular';
+    src: url('../font/silverthreadjf-webfont.woff2') format('woff2'),
+         url('../font/silverthreadjf-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'flamingosregular';
+    src: url('../font/flamingos-webfont.woff2') format('woff2'),
+         url('../font/flamingos-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'robotolight';
+    src: url('../font/roboto-light-webfont.woff2') format('woff2'),
+         url('../font/roboto-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
