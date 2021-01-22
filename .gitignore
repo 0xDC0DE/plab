@@ -7,6 +7,13 @@
 *secrets.yml
 html5_push_registrations.conf
 traefik2/acme/*
+hass/.storage
+hass/.cloud
+hass/.google.token
+*ip_bans.yaml
+*ip_bans.yml
+*known_devices.yaml
+*known_devices.yml
 
 # no databases, logfiles or archives
 *.db
