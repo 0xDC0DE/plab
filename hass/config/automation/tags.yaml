@@ -1,0 +1,11 @@
+- id: test_tag
+  alias: Testing tags
+  description: an automation to test nfc tags
+  trigger:
+  - event_data:
+      tag_id: 65cef45b-56b6-4973-8f9c-4dd69f630224
+    event_type: tag_scanned
+    platform: event
+  action:
+    service: light.toggle
+    entity_id: light.tower_lamp

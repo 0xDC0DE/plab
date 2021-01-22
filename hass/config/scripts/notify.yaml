@@ -11,12 +11,13 @@ conditional_notify_mobiles:
         title: "{{title}}"
         data:
           tag: "{{tag}}"
-#test_notify:
-#  mode: single
-#  alias: "testing variables in the notify_mobiles script"
-#  sequence:
-#    - service: script.conditional_notify_mobiles
-#      data:
-#        title: "Test title"
-#        message: "test message"
-#        tag: "vacuum"
+send_test_notification:
+  mode: single
+  alias: "notify mobiles if guest_mode not enabled"
+  sequence:
+    - service: notify.mobiles
+      data_template:
+        message: "Test message"
+        title: "Test"
+        data:
+          tag: "test"

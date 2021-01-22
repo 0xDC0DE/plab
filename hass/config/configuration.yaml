@@ -223,6 +223,7 @@ google_assistant:
     - switch
     - light
     - vacuum
+    - script
   entity_config:
     sensor.living_room_temperature:
       name: Living Room Temperature
