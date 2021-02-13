@@ -64,6 +64,9 @@ services:
         published: 8080
         protocol: tcp
         mode: host
+      # Mosquitto
+      #- "1883:1883"
+      #- "9001:9001"
     volumes:
       - $USERDIR/traefik2/rules:/rules
       - /var/run/docker.sock:/var/run/docker.sock:ro

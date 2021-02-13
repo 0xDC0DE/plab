@@ -317,3 +317,13 @@ camera:
     name: "Nursery"
 
 stream:
+
+
+####################
+# MQTT
+####################
+mqtt:
+  broker: 192.168.0.20
+  client_id: hassio-mqtt-client-id
+  username: !secret mqtt_user
+  password: !secret mqtt_password

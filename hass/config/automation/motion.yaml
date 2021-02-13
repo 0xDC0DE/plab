@@ -24,11 +24,6 @@
           sequence:
             - service: light.turn_on
               data:
-                entity_id: light.lidl_led_1
-                rgb_color: [255,150,50]
-                brightness: 150
-            - service: light.turn_on
-              data:
                 entity_id: light.hall_light
                 kelvin: 1750
                 brightness: 5
@@ -43,20 +38,6 @@
       entity_id: light.hall_light
     - service: switch.turn_off
       entity_id: switch.led_controller
-      # if during the day, wait two and a half minute before turning off cloud leds as well
-    - choose:
-        - conditions:
-          - condition:
-            condition: or
-            conditions:
-              - condition: sun
-                after: sunset
-              - condition: sun
-                before: sunrise
-          sequence:
-            - delay: '00:02:30'
-            - service: light.turn_off
-              entity_id: light.lidl_led_1
 - id: motion_stairway
   alias: "Motion Stairway"
   description: "Turn on light when there is motion in the stairway"

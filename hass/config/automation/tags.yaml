@@ -8,4 +8,4 @@
     platform: event
   action:
     service: light.toggle
-    entity_id: light.tower_lamp
+    entity_id: light.lidl_led_1

@@ -352,3 +352,98 @@ cards:
                 entity_id: scene.bedroom_cosy
               haptic: medium
             type: 'custom:button-card'
+          - entity: light.lidl_led_1
+            icon: 'mdi:cloud-outline'
+            name: Clouds
+            size: 30%
+            styles:
+              img_cell:
+            # You can adjust padding of the icon
+                - padding-left: 30px
+                - justify-content: start
+              card:
+                - margin: 10px
+                - margin-left: 15px
+                - width: 120px
+                - height: 100px
+                - border-radius: 15px
+                - box-shadow: |
+                    [[[ return states['sun.sun'].state == 'below_horizon'
+                      ? '-5px -5px 8px rgba(50, 50, 50,.5),5px 5px 8px rgba(0,0,0,.2)'
+                      : '-4px -4px 8px rgba(255,255,255,.9),5px 5px 8px rgba(0,0,0,.1)';
+                    ]]]
+                - background-color: var(--primary-background-color)
+              icon:
+                - color: var(--primary-text-color)
+              grid:
+                - grid-template-areas: '"i" "n" "s"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
+              name:
+                - justify-self: start
+                - font-weight: bold
+                - font-size: 15px
+                - padding-left: 15px
+              state:
+                - justify-self: start
+                - font-weight: bold
+                - font-size: 15px
+                - opacity: 0.6
+                - padding: 0 15px 5px
+            show_state: true
+            state:
+              - value: 'on'
+                styles:
+                  card:
+                    - box-shadow: |
+                        [[[ return states['sun.sun'].state == 'below_horizon'
+                          ? 'inset -4px -4px 5px rgba(60, 60, 60,.6), inset 4px 4px 5px rgba(0,0,0,.1)'
+                          : 'inset -3px -3px 5px rgba(255,255,255), inset 3px 3px 5px rgba(0,0,0,.2)';
+                        ]]]
+                  icon:
+                    - color: var(--paper-item-icon-active-color)
+            tap_action:
+              action: toggle
+              haptic: light
+            hold_action:
+              action: call-service
+              service: browser_mod.popup
+              service_data:
+                title: Cloud lights
+                card:
+                  type: entities
+                  show_header_toggle: false
+                  entities:
+                    - type: custom:slider-entity-row
+                      entity: light.lidl_led_1
+                      toggle: true
+                    - type: 'custom:rgb-light-card'
+                      entity: light.lidl_led_1
+                      justify: around
+                      colors:
+                        #rgb values between 0 and 255
+                        #brightnees between 0 and 255
+                          - rgb_color:
+                                - 254
+                                - 255
+                                - 0
+                          - rgb_color:
+                                - 255
+                                - 129
+                                - 1
+                          - rgb_color:
+                                - 255
+                                - 6
+                                - 128
+                          - rgb_color:
+                                - 70
+                                - 6
+                                - 255
+                          - rgb_color:
+                                - 0
+                                - 255
+                                - 126
+                  deviceID:
+                    - this
+              haptic: medium
+            type: 'custom:button-card'
