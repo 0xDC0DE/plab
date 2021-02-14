@@ -1,27 +1,20 @@
-- id: theme_toggle
-  alias: Theme toggle
-  description: Toggle theme during dusk and dawn
+- id: theme_toggle_day
+  alias: Theme toggle day
+  description: Toggle theme during dusk
   trigger:
   - event: sunrise
     platform: sun
+  action:
+    - service: frontend.set_theme
+      data:
+        name: clear
+- id: theme_toggle_night
+  alias: Theme toggle night
+  description: Toggle theme during dawn
+  trigger:
   - event: sunset
     platform: sun
   action:
-  - choose:
-    - conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: above_horizon
-      sequence:
-      - service: frontend.set_theme
-        data:
-          name: clear
-    - conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: below_horizon
-      sequence:
-      - service: frontend.set_theme
-        data:
-          name: slate
-  mode: single
+    - service: frontend.set_theme
+      data:
+        name: slate
