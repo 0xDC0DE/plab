@@ -1,0 +1,30 @@
+vacuum_toggle:
+  mode: single
+  alias: "vacuum toggle"
+  sequence:
+    - choose:
+      - conditions:
+         - "{{ is_state('vacuum.xiaomi_vacuum_cleaner', 'docked') }}"
+        sequence:
+         - service: vacuum.start
+           data:
+             entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+         - "{{ is_state('vacuum.xiaomi_vacuum_cleaner', 'cleaning') }}"
+        sequence:
+          - service: vacuum.stop
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+         - "{{ is_state('vacuum.xiaomi_vacuum_cleaner', 'idle') }}"
+        sequence:
+          - service: vacuum.return_to_base
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+      - conditions:
+         - "{{ is_state('vacuum.xiaomi_vacuum_cleaner', 'stopped') }}"
+        sequence:
+          - service: vacuum.return_to_base
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+
