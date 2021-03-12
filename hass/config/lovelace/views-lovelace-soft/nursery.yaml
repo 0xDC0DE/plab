@@ -1,0 +1,79 @@
+title: Nursery
+icon: mdi:baby
+path: nursery
+cards:
+  # Better layout control
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              # Baby room
+            style: |
+              ha-card {
+                height: 20px;
+                --card-background-color: 'rgba(11, 11, 11, 0.00)';
+                box-shadow: 2px 2px rgba(0,0,0,0.0);
+                margin-bottom: 15px;
+              }
+              h1 {
+                font-size: 20px;
+                font-weight: bold;
+                font-family: Helvetica;
+                letter-spacing: '-0.01em';
+              }
+      - type: picture-entity
+        entity: camera.nursery
+        camera_view: live
+        style: |
+          ha-card {
+            margin: 10px;
+            box-shadow:
+              {% if is_state('sun.sun', 'above_horizon') %}
+                -8px -8px 8px 0 rgba(255,255,255,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+              {% elif is_state('sun.sun', 'below_horizon') %}
+                -8px -8px 8px 0 rgba(50, 50, 50,.9),8px 8px 8px 0 rgba(0,0,0,.1);
+              {% endif %}
+          }
+      - type: custom:mini-graph-card
+        name: TEMPERATURE NURSERY
+        style: |
+          ha-card {
+            margin: 10px;
+            box-shadow:
+              {% if is_state('sun.sun', 'above_horizon') %}
+                -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+              {% elif is_state('sun.sun', 'below_horizon') %}
+                -8px -8px 8px 0 rgba(50, 50, 50,.5),8px 8px 8px 0 rgba(0,0,0,.15);
+              {% endif %}
+          }
+        entities:
+          - entity: sensor.bedroom_climate_sensor
+            name: Nursery
+          - entity: sensor.solar_elevation
+            color: "#FFC300"
+            name: Solar Elevation
+            show_line: true
+            line_width: 1
+            show_fill: false
+            show_points: false
+            show_legend: false
+            y_axis: secondary
+        lower_bound_secondary: 0
+        hour24: true
+        hours_to_show: 72
+        line_width: 3
+        animate: true
+        color_thresholds:
+          - value: 16
+            color: "#00aaff"
+          - value: 18
+            color: "#00cc00"
+          - value: 21
+            color: "#ffaa00"
+        show:
+          extrema: true
+          graph: line
+          points: false
