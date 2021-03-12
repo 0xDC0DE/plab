@@ -23,19 +23,6 @@
       suki_presence:
         value_template: '{{ states.input_select.suki_presence_status.state }}'
         friendly_name: 'Suki'
-# Dark sky weather entity into sensors
-#     dark_sky_temperature:
-#       friendly_name: "Outside Temperature"
-#       unit_of_measurement: '°C'
-#       value_template: "{{ state_attr('weather.dark_sky', 'temperature') }}"
-#     dark_sky_humidity:
-#       friendly_name: "Outside Humidity"
-#       unit_of_measurement: '%'
-#       value_template: "{{ state_attr('weather.dark_sky', 'humidity') }}"
-#     dark_sky_wind_speed:
-#       friendly_name: "Wind Speed"
-#       unit_of_measurement: 'km/h'
-#       value_template: "{{ state_attr('weather.dark_sky', 'wind_speed') }}"
 # OpenWeatherMap entity into sensors
       owm_temperature:
         friendly_name: "Outside Temperature"
@@ -61,6 +48,11 @@
       nighttime:
         value_template: '{% if is_state("sun.sun", "above_horizon") -%}0{%- else -%}1{%- endif %}'
         friendly_name: 'Nighttime'
+# Sun elevation as a sensor
+      solar_elevation:
+        friendly_name: "Solar Elevation"
+        unit_of_measurement: '°'
+        value_template: "{{ state_attr('sun.sun', 'elevation') }}"
 # Washer sensors: one for power and one for running/not-running
       washer_power:
         friendly_name: 'Washer Power Usage'
@@ -76,57 +68,18 @@
       dryer_status:
         friendly_name: 'Dryer Status'
         value_template: "{% if states('sensor.dryer_power')|float > 2 %}on{% else %}off{% endif %}"
-# Sun elevation as a sensor
-      solar_elevation:
-        friendly_name: "Solar Elevation"
-        unit_of_measurement: '°'
-        value_template: "{{ state_attr('sun.sun', 'elevation') }}"
-# Weather status icon name
-      weather_icon:
-        friendly_name: "mdi Real Weather Icon"
-        icon_template: >-
-            {% if is_state("weather.openweathermap","sunny") %} mdi:weather-sunny
-            {% elif is_state("weather.openweathermap","clear-night") %} mdi:weather-night
-            {% elif is_state("weather.openweathermap","cloudy") %} mdi:weather-cloudy
-            {% elif is_state("weather.openweathermap","fog") %} mdi:weather-fog
-            {% elif is_state("weather.openweathermap","hail") %} mdi:weather-hail
-            {% elif is_state("weather.openweathermap","lightning") %} mdi:weather-lightning
-            {% elif is_state("weather.openweathermap","lightning-rainy") %} mdi:weather-lightning-rainy
-            {% elif is_state("weather.openweathermap","partly-cloudy") %} mdi:weather-partly-cloudy
-            {% elif is_state("weather.openweathermap","partly-cloudy-night") %} mdi:weather-night-partly-cloudy
-            {% elif is_state("weather.openweathermap","pouring") %} mdi:weather-pouring
-            {% elif is_state("weather.openweathermap","rainy") %} mdi:weather-rainy
-            {% elif is_state("weather.openweathermap","snowy") %} mdi:weather-snowy
-            {% elif is_state("weather.openweathermap","snowy-rainy") %} mdi:weather-snowy-rainy
-            {% elif is_state("weather.openweathermap","windy") %} mdi:weather-windy
-            {% elif is_state("weather.openweathermap","windy-variant") %} mdi:weather-windy-variant
-            {% elif is_state("weather.openweathermap","exceptional") %} mdi:weather-cloudy-alert
-            {% endif %}
-        value_template: >-
-            {% if is_state("weather.openweathermap","sunny") %} weather-sunny
-            {% elif is_state("weather.openweathermap","clear-night") %} weather-night
-            {% elif is_state("weather.openweathermap","cloudy") %} weather-cloudy
-            {% elif is_state("weather.openweathermap","fog") %} weather-fog
-            {% elif is_state("weather.openweathermap","hail") %} weather-hail
-            {% elif is_state("weather.openweathermap","lightning") %} weather-lightning
-            {% elif is_state("weather.openweathermap","lightning-rainy") %} weather-lightning-rainy
-            {% elif is_state("weather.openweathermap","partly-cloudy") %} weather-partly-cloudy
-            {% elif is_state("weather.openweathermap","partly-cloudy-night") %} weather-night-partly-cloudy
-            {% elif is_state("weather.openweathermap","pouring") %} weather-pouring
-            {% elif is_state("weather.openweathermap","rainy") %} weather-rainy
-            {% elif is_state("weather.openweathermap","snowy") %} weather-snowy
-            {% elif is_state("weather.openweathermap","snowy-rainy") %} weather-snowy-rainy
-            {% elif is_state("weather.openweathermap","windy") %} weather-windy
-            {% elif is_state("weather.openweathermap","windy-variant") %} weather-windy-variant
-            {% elif is_state("weather.openweathermap","exceptional") %} weather-cloudy-alert
-            {% endif %}
-# Airvisual, API key expires every 12 months
-# --> replaced by using UI Integration
-#- platform: airvisual
-#    api_key: !secret av_api_key
-#    show_on_map: false
-# illuminance sensor based on sun height and weather conditions
-# Does not officially support openweathermap data
-# - platform: illuminance
-#   name: Illuminance
-#   entity_id: weather.openweathermap
+# MQTT sensors
+  - platform: mqtt
+    unique_id: catfeeder_lastfeed
+    name: "Catfeeder last feed"
+    icon: mdi:speedometer
+    state_topic: "home/catfeeder/lastfeed" #unsigned long that represents epoch time
+    # availability_topic: "home/catfeeder/lwt"
+    value_template: "{{ value  | int | timestamp_utc }}"
+  - platform: mqtt
+    unique_id: catfeeder_remaining
+    name: "Catfeeder food remaining"
+    icon: mdi:speedometer
+    state_topic: "home/catfeeder/remaining"
+    # availability_topic: "home/catfeeder/lwt"
+    value_template: "{{ value  | int  }}"

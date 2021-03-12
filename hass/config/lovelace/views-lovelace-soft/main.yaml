@@ -1,7 +1,6 @@
 title: Home
 icon: mdi:home
 path: home
-panel: true
 cards:
   # Better layout control
   - type: custom:layout-card
@@ -14,13 +13,14 @@ cards:
             # #################################
           - type: markdown
             content: >
-              #
               {% if now().hour < 10 %}
-              Good morning.
-              {% elif now().hour > 18 %}
-              Good evening.
+              # Good morning
+              {% elif now().hour > 18 and now().hour < 22 %}
+              # Good evening
+              {% elif now().hour >= 22 %}
+              # Good night
               {% else %}
-              Good day.
+              # Good day
               {% endif %}
             style:
               .: |
@@ -132,7 +132,15 @@ cards:
             # #################################
               - type: markdown
                 content: >
-                  # There are {{expand(states.group.bedroom_lights) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length + expand(states.group.office_devices) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length + expand(states.group.downstairs_lights) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length }} devices on
+                  {% set bedroom_count = expand(states.group.bedroom_lights) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length %}
+                  {% set office_count = expand(states.group.office_devices) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length %}
+                  {% set downstairs_count = expand(states.group.downstairs_lights) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length %}
+                  {% set total = bedroom_count + office_count + downstairs_count %}
+                  {% if  total == 1 %}
+                  # There is 1 device on
+                  {% else %}
+                  # There are {{ total }} devices on
+                  {% endif %}
                 style:
                   .: |
                     ha-card {
@@ -270,11 +278,11 @@ cards:
                   {%- set end = 's' if value > 1 else '' %}
                   {{- '{} {}{}'.format(value, name, end) if value | int > 0 else '' }}
                   {%- endmacro %}
-                  {% set text = [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hr'),
-                   phrase(minutes, 'min') ] | select('!=','') | list | join(', ') %}
-                  {% set last_comma = text.rfind(',') %}
-                  {%- set text = text[:last_comma] + ' and ' + text[last_comma + 1:] if last_comma > 0 else text%}
-                  # Last vacuumed {{ text }} ago
+                  {% set text = [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hour'),
+                   phrase(minutes, 'minute') ] | select('!=','') | list | join(', ') %}
+                  {% set last_comma = text.find(',') %}
+                  {%- set text = text[:last_comma] if last_comma > 0 else text%}
+                  # Vacuumed {{ text }} ago
                   {% endif %}
                 style:
                   .: |
@@ -324,10 +332,12 @@ cards:
         cards:
           - type: vertical-stack
             cards:
-                # Big text to display - First button
+                # #################################
+                # Big text to display - Fourth button
+                # #################################
               - type: markdown
-                content: |
-                  # Lights
+                content: >
+                  # Cat feeder ({{ states('sensor.catfeeder_food_remaining')}}% left)
                 style:
                   .: |
                     ha-card {
@@ -345,13 +355,32 @@ cards:
                         font-family: Helvetica;
                         letter-spacing: '-0.01em';
                       }
-# Small text to display - First button
+                # #################################
+                # Small text to display - Fourth button
+                # #################################
               - type: markdown
                 content: >
-                  # There are {{expand(states.group.bedroom_lights) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length + expand(states.group.office_devices) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length + expand(states.group.downstairs_lights) | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | length }} lights on
+                  {% set up_time = as_timestamp(now()) - as_timestamp(states('sensor.catfeeder_last_feed')) %}
+                  {% set days = (up_time // (60 * 60 * 24)) | int %}
+                  {% set weeks = (days // 7) | int %}
+                  {% set hours = (up_time // (60 * 60)) | int %}
+                  {% set hours =  hours - days * 24 %}{% set minutes = (up_time // 60) | int %}
+                  {% set minutes = minutes - (days * 24 * 60) - (hours * 60) %}
+                  {% set days = (days | int) - (weeks * 7) %}
+                  {% macro phrase(value, name) %}
+                  {%- set value = value | int %}
+                  {%- set end = 's' if value > 1 else '' %}
+                  {{- '{} {}{}'.format(value, name, end) if value | int > 0 else '' }}
+                  {%- endmacro %}
+                  {% set text = [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hour'),
+                   phrase(minutes, 'minute') ] | select('!=','') | list | join(', ') %}
+                  {% set last_comma = text.find(',') %}
+                  {%- set text = text[:last_comma] if last_comma > 0 else text%}
+                  # Cats fed {{ text }} ago
                 style:
                   .: |
                     ha-card {
+                    margin-top: -35px;
                       --ha-card-background: none !important;
                       box-shadow: none !important;
                       text-align: right;
@@ -366,7 +395,7 @@ cards:
                       }
             # Icon to display - First button
           - type: 'custom:button-card'
-            icon: 'mdi:lightbulb-multiple'
+            icon: 'mdi:cat'
             show_icon: true
             show_name: false
             style: |
@@ -388,5 +417,8 @@ cards:
               icon:
                 - color: var(--primary-text-color)
             tap_action:
-              action: navigate
-              navigation_path: /lovelace/lights
+              action: call-service
+              service: mqtt.publish
+              service_data:
+                topic: home/catfeeder/feed
+                payload: feed

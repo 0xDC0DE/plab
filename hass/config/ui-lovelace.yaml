@@ -1,9 +1,12 @@
 title: Tatooine
 custom_header:
-  header_text: 'Testing custom header'
+  header_text: 'Home Assistant'
   elements_color: 'var(--primary-text-color)'
   tab_indicator_color: 'var(--primary-text-color)'
+  indicator_top: true
   background: 'var(--primary-background-color)'
+  # footer_mode: true
+  split_mode: true
   #  hide_header: true
 views:
   # Including separately instead of the yaml files directly allows for easier reordering of the tabs (instead of renaming files for their order)

@@ -79,8 +79,47 @@ cards:
               action: toggle
               haptic: light
             hold_action:
-              action: more-info
-              entity: light.led_strip_2
+              action: call-service
+              service: browser_mod.popup
+              service_data:
+                title: Bedroom lights
+                card:
+                  type: entities
+                  show_header_toggle: false
+                  entities:
+                    - type: custom:slider-entity-row
+                      entity: light.led_strip_2
+                      toggle: true
+                    - type: 'custom:rgb-light-card'
+                      entity: light.led_strip_2
+                      justify: around
+                      colors:
+                          - rgb_color:
+                                - 254
+                                - 255
+                                - 0
+                          - rgb_color:
+                                - 255
+                                - 129
+                                - 1
+                          - rgb_color:
+                                - 255
+                                - 6
+                                - 128
+                          - rgb_color:
+                                - 70
+                                - 6
+                                - 255
+                          - rgb_color:
+                                - 0
+                                - 255
+                                - 126
+                    - light.corner_lamp
+                    - light.tower_lamp
+                    - light.bar_lamp
+                    - light.ivar_lamp
+                  deviceID:
+                    - this
               haptic: medium
             type: 'custom:button-card'
           - entity: group.bedroom_lights
@@ -147,6 +186,7 @@ cards:
                   entities:
                     - type: custom:slider-entity-row
                       entity: light.bedroom_ceiling_light
+                      name: "Ceiling"
                       toggle: true
                     - type: 'custom:rgb-light-card'
                       entity: light.bedroom_ceiling_light

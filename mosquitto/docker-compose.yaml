@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  mosquitto:
+    container_name: mosquitto
+    restart: unless-stopped
+    image: eclipse-mosquitto:latest
+    network_mode: host
+    volumes:
+      - $USERDIR/mosquitto/config:/mosquitto/config
+      - $USERDIR/mosquitto/data:/mosquitto/data
+      - $USERDIR/mosquitto/log:/mosquitto/log

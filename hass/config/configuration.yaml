@@ -90,19 +90,6 @@ logger: # https://www.home-assistant.io/components/logger/
     custom_components: debug
     pyupdate: debug
 
-####################
-# WEATHER
-####################
-# darksky is bought by apple
-weather:
-#  - platform: darksky
-#    api_key: !secret darksky_api_key
-#    mode: daily
-# - platform: buienradar
-  - platform: openweathermap
-    api_key: !secret openweathermap_api_key
-    mode: freedaily
-
 sun:
 
 ####################
@@ -299,9 +286,8 @@ notify:
   - name: mobiles
     platform: group
     services:
-      - service: mobile_app_sarah
       - service: mobile_app_pieter
-      - service: mobile_app_oneplus_a6003
+      - service: mobile_app_nokia_7_1
 
 ####################
 # CAMERA
@@ -327,3 +313,4 @@ mqtt:
   client_id: hassio-mqtt-client-id
   username: !secret mqtt_user
   password: !secret mqtt_password
+

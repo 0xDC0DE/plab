@@ -17,7 +17,7 @@ send_test_notification:
   sequence:
     - service: notify.mobiles
       data_template:
-        message: "Test message"
+        message: "Testing notify.mobiles"
         title: "Test"
         data:
           tag: "test"

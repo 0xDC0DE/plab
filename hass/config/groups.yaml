@@ -55,4 +55,3 @@ office_lights:
     - switch.star_light
     - light.led_strip
     - light.red_lamp
-
