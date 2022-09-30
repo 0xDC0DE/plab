@@ -5,7 +5,7 @@
     "private": true,
     "dependencies": {
         "node-red-contrib-alarm-clock": "^1.0.5",
-        "node-red-contrib-home-assistant-websocket": "~0.15.0",
+        "node-red-contrib-home-assistant-websocket": "~0.45.3",
         "node-red-contrib-loop-processing": "~0.3.1",
         "node-red-contrib-moment": "~3.0.3",
         "node-red-contrib-simpletime": "~2.7.0",
